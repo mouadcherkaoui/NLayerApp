@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageTargetFallback>portable-net45+win8</PackageTargetFallback>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>  
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetCore.Infrastructure\DotNetCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\DotNetCore.Models\DotNetCore.Models.csproj" />
+    <ProjectReference Include="..\DotNetCore.DynamicModelDefinition\DotNetCore.DynamicModelDefinition.csproj" />        
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+  </ItemGroup>
+</Project>
