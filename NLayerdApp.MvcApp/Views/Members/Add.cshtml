@@ -1,0 +1,13 @@
+@model NLayerdApp.Views.ViewModels.EntityComponentViewModel
+<h1>Add</h1>
+
+
+@using (Html.BeginForm())
+{
+    
+    <ul>
+        @await Component.InvokeAsync("Entity", new { entityType = Model.ModelType })
+        <button type="submit" value="submit">Add</button>   
+    </ul>
+    @Html.AntiForgeryToken() 
+}

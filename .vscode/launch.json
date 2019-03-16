@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/DotNetCore.MvcApp/bin/Debug/netcoreapp2.1/DotNetCore.MvcApp.dll",
+            "program": "${workspaceRoot}/NLayerdApp.MvcApp/bin/Debug/netcoreapp2.1/NLayerdApp.MvcApp.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/DotNetCore.MvcApp",
+            "cwd": "${workspaceRoot}/NLayerdApp.MvcApp",
             "stopAtEntry": false,
             "console": "internalConsole"
         },
@@ -17,9 +17,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/DotNetCore.MvcApp/bin/Debug/netcoreapp2.1/DotNetCore.MvcApp.dll",
+            "program": "${workspaceRoot}/NLayerdApp.MvcApp/bin/Debug/netcoreapp2.1/NLayerdApp.MvcApp.dll",
             "args": [ ],
-            "cwd": "${workspaceRoot}/DotNetCore.MvcApp",
+            "cwd": "${workspaceRoot}/NLayerdApp.MvcApp",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": true,
@@ -39,8 +39,8 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceRoot}/DotNetCore.MvcApp/Views",
-                "/wwwroot": "${workspaceRoot}/DotNetCore.MvcApp/wwwroot"
+                "/Views": "${workspaceRoot}/NLayerdApp.MvcApp/Views",
+                "/wwwroot": "${workspaceRoot}/NLayerdApp.MvcApp/wwwroot"
             }
         },
         {

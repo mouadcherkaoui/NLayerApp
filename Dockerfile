@@ -1,8 +1,8 @@
 FROM microsoft/aspnetcore-build
 
 ADD . /src
-WORKDIR /src/DotNetCore.MvcApp
+WORKDIR /src/NLayerdApp.MvcApp
 RUN dotnet restore
 RUN dotnet publish -o /app
 WORKDIR /app
-ENTRYPOINT ["dotnet", "DotNetCore.MvcApp.dll"]
+ENTRYPOINT ["dotnet", "NLayerdApp.MvcApp.dll"]

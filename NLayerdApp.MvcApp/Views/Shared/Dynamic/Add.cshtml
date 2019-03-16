@@ -1,0 +1,15 @@
+@model DotNetCore.Views.ViewModels.EntityComponentViewModel
+<h1>Add @Model.ModelType?.Name</h1>
+
+<a href="../Index">Back To List</a>   
+
+@using (Html.BeginForm())
+{
+    
+    <ul>
+        @await Component.InvokeAsync("Entity", new { entityType = Model.ModelType, viewType = Model.ViewType })
+        <button type="submit" value="submit">Add</button>   
+        <button type="reset" value="reset">Reset</button>        
+    </ul>
+    @Html.AntiForgeryToken() 
+}

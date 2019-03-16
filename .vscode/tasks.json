@@ -8,7 +8,7 @@
     "tasks": [
         {
             "taskName": "build",
-            "args": [ "DotNetCore.MvcApp"],
+            "args": [ "NLayerdApp.MvcApp"],
             "isBuildCommand": true,
             "showOutput": "silent",
             "problemMatcher": "$msCompile"

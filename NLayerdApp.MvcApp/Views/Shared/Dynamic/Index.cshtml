@@ -1,0 +1,5 @@
+@model DotNetCore.Views.ViewModels.EntityComponentViewModel
+<h1>Update</h1>
+
+@Html.ActionLink("Add", "Add");
+@await Component.InvokeAsync("EntityList", new { entityType = Model.ModelType, modelInstance = Model.ModelInstance })

@@ -1,0 +1,30 @@
+@model DotNetCore.Views.ViewModels.EntityComponentViewModel
+@using System.Collections;
+
+@*model ViewBag.Model.ModelInstance*@
+<h2>Properties</h2>
+<table class="table striped">
+    <thead>
+        <tr>
+        @foreach(var current in Model.Properties.Where(p => p.Key.Name != "CreatedAt" && p.Key.Name != "ModifiedAt")){
+            <th>@current.Key.Name</th>
+        }
+        <th></th>
+        </tr>
+    </thead>
+        @foreach(var current in (IEnumerable)Model.ModelInstance){
+            <tr>
+                @foreach(var property in Model.Properties.Where(p => p.Key.Name != "CreatedAt" && p.Key.Name != "ModifiedAt")){
+                    <td>@property.Key.GetValue(current)</td>
+                }
+                <td>
+                    @{var parameter = new { id = ((dynamic)current).Id }; }
+                    @Html.ActionLink("Details", "Index", parameter) | 
+                    @Html.ActionLink("Update", "Update", parameter) | 
+                    @Html.ActionLink("Delete", "Delete", parameter)
+                </td>
+            </tr>
+        }    
+    <tbody>
+    </tbody>
+</table>
