@@ -1,4 +1,4 @@
-namespace NLayerAppp.DataAccessLayer
+namespace NLayerApp.DataAccessLayer
 {
     public class AppDataContextFactory
     {

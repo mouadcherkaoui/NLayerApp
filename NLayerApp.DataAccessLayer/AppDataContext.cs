@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Models;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace NLayerAppp.DataAccessLayer
+namespace NLayerApp.DataAccessLayer
 {
     public class AppDataContext : DbContext, IContext
     {

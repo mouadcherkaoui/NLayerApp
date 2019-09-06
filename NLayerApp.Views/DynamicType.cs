@@ -1,6 +1,6 @@
 using System;
 
-namespace NLayerAppp.Views
+namespace NLayerApp.Views
 {
     public class DynamicType<T> //: Type
     {

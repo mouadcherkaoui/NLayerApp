@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NLayerAppp.Infrastructure.Models 
+namespace NLayerApp.Infrastructure.Models 
 {
 
     public class Link

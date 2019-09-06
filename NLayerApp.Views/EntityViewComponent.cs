@@ -5,9 +5,9 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using NLayerAppp.Views.ViewModels;
+using NLayerApp.Views.ViewModels;
 
-namespace NLayerAppp.Views
+namespace NLayerApp.Views
 {
     public class EntityViewComponent : ViewComponent
     {

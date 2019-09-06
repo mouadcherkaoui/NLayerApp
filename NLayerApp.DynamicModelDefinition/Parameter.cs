@@ -1,6 +1,6 @@
 using System;
 
-namespace NLayerAppp.DynamicModelsDefnition
+namespace NLayerApp.DynamicModelDefnition
 {
     public class Parameter
     {

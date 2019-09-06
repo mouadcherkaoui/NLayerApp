@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace NLayerAppp.Metadata
+namespace NLayerApp.Metadata
 {
     public class ColumnMetaDataInfo
     {

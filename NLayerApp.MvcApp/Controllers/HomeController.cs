@@ -1,7 +1,7 @@
-using NLayerAppp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.DataAccessLayer;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NLayerAppp.MvcApp.Controllers
+namespace NLayerApp.MvcApp.Controllers
 {
     public class HomeController : Controller
     {

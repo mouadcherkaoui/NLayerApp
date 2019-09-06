@@ -1,6 +1,6 @@
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Models;
 
-namespace NLayerAppp.Infrastructure.Controllers
+namespace NLayerApp.Infrastructure.Controllers
 {
     public interface IApiRepositoryController<TEntity, TKey, TResult>
         where TEntity: IEntity, IEntity<TKey>

@@ -1,4 +1,4 @@
-namespace NLayerAppp.Controllers.Attributes
+namespace NLayerApp.Controllers.Attributes
 {
     [System.AttributeUsage(System.AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public class GeneratedControllerAttribute : System.Attribute

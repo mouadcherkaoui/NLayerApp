@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using NLayerAppp.Views.ViewModels;
+using NLayerApp.Views.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NLayerAppp.Views
+namespace NLayerApp.Views
 {
     public class EntityListViewComponent: ViewComponent
     {

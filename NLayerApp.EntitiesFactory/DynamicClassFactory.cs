@@ -6,11 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.Serialization;
-using NLayerAppp.DynamicModelsDefnition;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Models;
+using NLayerApp.DynamicModelDefnition;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Models;
 
-namespace RD.DataStructureGenerator
+namespace NLayerApp.DataStructureGenerator
 {
     public class DynamicClassFactory
     {

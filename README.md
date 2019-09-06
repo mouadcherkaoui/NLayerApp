@@ -1,7 +1,7 @@
 # NetCoreDynamics
 
 ## Tools :
-- NLayerAppp runtime and sdk.
+- NLayerApp runtime and sdk.
 - nodejs and npm on your local machine.
 - local instance of a Sql Server "Express Edition"
 - VS Code IDE

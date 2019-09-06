@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace NLayerAppp.Views.ViewModels
+namespace NLayerApp.Views.ViewModels
 {
     public class EntityComponentViewModel
     {

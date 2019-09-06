@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
 
-namespace NLayerAppp.Infrastructure.Models
+namespace NLayerApp.Infrastructure.Models
 {
     public class BaseEntityObject : IEntity
     {

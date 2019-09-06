@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace NLayerAppp.DynamicModelsDefnition
+namespace NLayerApp.DynamicModelDefnition
 {
     public class DynamicFieldType
     {

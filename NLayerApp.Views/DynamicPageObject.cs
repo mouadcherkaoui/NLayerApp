@@ -1,6 +1,6 @@
 using System.Dynamic;
 using System.Reflection;
-namespace NLayerAppp.Views
+namespace NLayerApp.Views
 {
     public class DynamicPageObject: DynamicObject
     {

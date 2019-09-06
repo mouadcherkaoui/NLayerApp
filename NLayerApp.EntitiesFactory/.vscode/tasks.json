@@ -7,7 +7,7 @@
         {
             "taskName": "build",
             "args": [
-                "${workspaceRoot}\\NLayerAppp.EntitiesFactory.csproj"
+                "${workspaceRoot}\\NLayerApp.EntitiesFactory.csproj"
             ],
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"

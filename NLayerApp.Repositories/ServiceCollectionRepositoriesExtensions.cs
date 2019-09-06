@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Repositories;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NLayerAppp.Repositories
+namespace NLayerApp.Repositories
 {
     public static class ServiceCollectionRepositoriesExtensions
     {

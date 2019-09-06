@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Models;
 
-namespace NLayerAppp.Models
+namespace NLayerApp.Models
 {
     public class Group : IEntity, IEntity<int>
     {

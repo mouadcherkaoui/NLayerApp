@@ -1,4 +1,4 @@
-namespace NLayerAppp.Infrastructure.CQRS
+namespace NLayerApp.Infrastructure.CQRS
 {
     public interface ICommand
     {

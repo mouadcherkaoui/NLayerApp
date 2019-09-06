@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace NLayerAppp.MvcApp.ViewModels
+namespace NLayerApp.MvcApp.ViewModels
 {
     public class FeaturesViewModel
     {

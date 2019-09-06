@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Models;
 
-namespace NLayerAppp.Models
+namespace NLayerApp.Models
 {
     public class Room : IEntity, IEntity<int>
     {

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Infrastructure.Repositories;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Repositories;
 
-namespace NLayerAppp.Repositories
+namespace NLayerApp.Repositories
 {
     public class Repository<TContext, TEntity, TKey> : IRepository<TEntity, TKey>
         where TContext: class, IContext

@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class GenericActionConvention : Attribute, IActionModelConvention

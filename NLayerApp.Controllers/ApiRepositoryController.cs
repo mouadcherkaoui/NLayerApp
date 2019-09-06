@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Repositories;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Infrastructure.Controllers;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Repositories;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Controllers;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     public class ApiRepositoryController<TContext, TEntity, TKey>
         : Controller, IApiRepositoryController<TEntity, TKey, IActionResult>

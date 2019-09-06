@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NLayerAppp.Repositories;
+using NLayerApp.Repositories;
 using System;
-using NLayerAppp.Models;
-using NLayerAppp.Controllers;
-using NLayerAppp.DataAccessLayer;
-using NLayerAppp.Infrastructure.DataAccessLayer;
+using NLayerApp.Models;
+using NLayerApp.Controllers;
+using NLayerApp.DataAccessLayer;
+using NLayerApp.Infrastructure.DataAccessLayer;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace NLayerAppp.MvcApp
+namespace NLayerApp.MvcApp
 {
     public class Startup
     {
@@ -118,7 +118,7 @@ namespace NLayerAppp.MvcApp
         }
     }
 
-        public static class MvcBuilderExtensions
+    public static class MvcBuilderExtensions
     {
         public static IMvcBuilder UseDynamicControllers(this IMvcBuilder builder)
         {

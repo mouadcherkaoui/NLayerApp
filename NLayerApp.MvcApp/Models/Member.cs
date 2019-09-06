@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using NLayerAppp.Controllers.Attributes;
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Controllers.Attributes;
+using NLayerApp.Infrastructure.Models;
 
-namespace NLayerAppp.MvcApp.Models
+namespace NLayerApp.MvcApp.Models
 {
     [GeneratedController("api/v1/members")]
     public class Member : IEntity, IEntity<int>

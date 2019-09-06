@@ -1,4 +1,4 @@
-namespace NLayerAppp.DynamicModelsDefnition
+namespace NLayerApp.DynamicModelDefnition
 {
     public class DynamicConstraint
     {

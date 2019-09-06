@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
-namespace NLayerAppp.Views.Helpers
+namespace NLayerApp.Views.Helpers
 {
     public class DynamicEditor : HtmlHelper, IHtmlHelper
     {

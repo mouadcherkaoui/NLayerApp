@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NLayerAppp.Controllers.Attributes;
-using NLayerAppp.DataAccessLayer;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Models;
+using NLayerApp.Controllers.Attributes;
+using NLayerApp.DataAccessLayer;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Models;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     public class GeneratedControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
@@ -22,7 +22,9 @@ namespace NLayerAppp.Controllers
             foreach (var current in candidates)
             {
                 var idType = current.GetProperty("Id").PropertyType;
-                feature.Controllers.Add(typeof(ApiRepositoryController<,,>).MakeGenericType(new Type[] {typeof(AppDataContext), current, idType}).GetTypeInfo());
+                feature.Controllers.Add(typeof(ApiRepositoryController<,,>)
+                    .MakeGenericType(new Type[] {typeof(AppDataContext), current, idType})
+                    .GetTypeInfo());
             }
         }
     }

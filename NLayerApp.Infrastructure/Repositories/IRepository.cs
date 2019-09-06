@@ -1,7 +1,7 @@
 using System.Linq;
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Models;
 
-namespace NLayerAppp.Infrastructure.Repositories
+namespace NLayerApp.Infrastructure.Repositories
 {
     public interface IRepository<TEntity, TKey>
         where TEntity : class, IEntity, IEntity<TKey>

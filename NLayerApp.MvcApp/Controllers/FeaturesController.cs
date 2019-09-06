@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
-using NLayerAppp.MvcApp.ViewModels;
+using NLayerApp.MvcApp.ViewModels;
 using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 using Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using System.Linq;
 
-namespace NLayerAppp.MvcApp.Controllers
+namespace NLayerApp.MvcApp.Controllers
 {
     public class FeaturesController : Controller
     {

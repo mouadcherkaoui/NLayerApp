@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     public class EntityModelBinder : IModelBinder
     {

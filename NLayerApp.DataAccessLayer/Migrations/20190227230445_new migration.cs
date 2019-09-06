@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NLayerAppp.DataAccessLayer.Migrations
+namespace NLayerApp.DataAccessLayer.Migrations
 {
     public partial class newmigration : Migration
     {

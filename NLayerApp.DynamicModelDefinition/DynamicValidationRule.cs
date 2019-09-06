@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NLayerAppp.DynamicModelsDefnition
+namespace NLayerApp.DynamicModelDefnition
 {
     public class DynamicValidationRule
     {

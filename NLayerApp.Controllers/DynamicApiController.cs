@@ -1,10 +1,10 @@
-using NLayerAppp.Controllers.Attributes;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Infrastructure.Repositories;
+using NLayerApp.Controllers.Attributes;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NLayerAppp.Controllers.Rest
+namespace NLayerApp.Controllers.Rest
 {
     [Route("api/[controller]")]
     [GenericControllerNameConvention(typeof(DynamicApiController<,,>))]

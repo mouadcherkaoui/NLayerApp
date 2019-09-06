@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace NLayerAppp.Views
+namespace NLayerApp.Views
 {
     public class DynamicViewResult : ViewResult
     {

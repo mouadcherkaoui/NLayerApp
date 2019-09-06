@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace NLayerAppp.Infrastructure.CQRS
+namespace NLayerApp.Infrastructure.CQRS
 {
     public interface IAsyncCommand<out TResult>
     {

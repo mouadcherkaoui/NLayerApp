@@ -1,9 +1,9 @@
-using NLayerAppp.Controllers.Attributes;
+using NLayerApp.Controllers.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using System.Reflection;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     public class GeneratedControllerNameConvention : IControllerModelConvention
     {

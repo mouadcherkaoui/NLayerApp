@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NLayerAppp.Infrastructure.Models
+namespace NLayerApp.Infrastructure.Models
 {
     public interface IEntity
     {

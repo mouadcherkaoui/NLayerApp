@@ -1,9 +1,9 @@
-using NLayerAppp.Controllers;
-using NLayerAppp.DataAccessLayer;
-using NLayerAppp.Infrastructure.Repositories;
-using NLayerAppp.Models;
+using NLayerApp.Controllers;
+using NLayerApp.DataAccessLayer;
+using NLayerApp.Infrastructure.Repositories;
+using NLayerApp.Models;
 
-namespace NLayerAppp.MvcApp.Controllers
+namespace NLayerApp.MvcApp.Controllers
 {
     public class MembersController : ApiRepositoryController<AppDataContext, Member, int>
     {

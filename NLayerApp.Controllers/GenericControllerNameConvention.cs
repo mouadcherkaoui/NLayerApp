@@ -1,8 +1,8 @@
 using System;
-using NLayerAppp.Controllers.Rest;
+using NLayerApp.Controllers.Rest;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace NLayerAppp.Controllers.Attributes
+namespace NLayerApp.Controllers.Attributes
 {
     [AttributeUsageAttribute(AttributeTargets.Class, AllowMultiple=false, Inherited=true)]
     public class GenericControllerNameConvention : Attribute, IControllerModelConvention//, IActionModelConvention

@@ -1,9 +1,9 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using NLayerAppp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Models;
 
-namespace NLayerAppp.Models
+namespace NLayerApp.Models
 {
     public abstract class BaseEntity : IEntity
     {

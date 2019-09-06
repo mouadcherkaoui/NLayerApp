@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using NLayerAppp.Infrastructure.CQRS;
+using NLayerApp.Infrastructure.CQRS;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     public class ApiCommandController: Controller
     {

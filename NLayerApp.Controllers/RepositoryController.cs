@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NLayerAppp.Infrastructure.Controllers;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Infrastructure.Repositories;
-using NLayerAppp.Controllers.Attributes;
-using NLayerAppp.Views.ViewModels;
+using NLayerApp.Infrastructure.Controllers;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Infrastructure.Repositories;
+using NLayerApp.Controllers.Attributes;
+using NLayerApp.Views.ViewModels;
 using System.Linq;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     [GenericControllerNameConvention(typeof(RepositoryController<,,>))]
     [Route("[controller]")]

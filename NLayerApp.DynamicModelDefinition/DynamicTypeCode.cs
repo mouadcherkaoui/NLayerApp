@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace NLayerAppp.DynamicModelsDefnition
+namespace NLayerApp.DynamicModelDefnition
 {
     public enum DynamicTypeCode
     {

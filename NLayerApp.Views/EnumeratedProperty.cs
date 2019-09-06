@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace NLayerAppp.Views
+namespace NLayerApp.Views
 {
     public class BaseEntityt
     {

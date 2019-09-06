@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NLayerAppp.Controllers.Rest;
-using NLayerAppp.Infrastructure.DataAccessLayer;
-using NLayerAppp.Infrastructure.Models;
-using NLayerAppp.Models;
+using NLayerApp.Controllers.Rest;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Infrastructure.Models;
+using NLayerApp.Models;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 
-namespace NLayerAppp.Controllers
+namespace NLayerApp.Controllers
 {
     public class GenericControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
     {
