@@ -1,7 +1,7 @@
 ﻿@using System.Reflection
 @using System.Linq
 @using System.ComponentModel
-@using NLayer.Blazor.WebAssembly.Models
+@using NLayerApp.Blazor.WebAssembly.Models
 
 @typeparam TItem
 
@@ -31,9 +31,6 @@
     
     protected override async Task OnInitializedAsync()
     {
-        ((INotifyPropertyChanged)Items.First()).PropertyChanged += (sender, args) => {
-            Console.WriteLine(args);
-        };
         @foreach(var item in Items)
             @foreach(var property in typeof(TItem).GetProperties())
             {

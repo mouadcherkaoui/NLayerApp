@@ -5,8 +5,8 @@
     <OutputType>Exe</OutputType>
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
-    <AssemblyName>NLayer.Blazor.WebAssembly</AssemblyName>
-    <RootNamespace>NLayer.Blazor.WebAssembly</RootNamespace>
+    <AssemblyName>NLayerApp.Blazor.WebAssembly</AssemblyName>
+    <RootNamespace>NLayerApp.Blazor.WebAssembly</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

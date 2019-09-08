@@ -1,4 +1,4 @@
-namespace NLayer.Blazor.WebAssembly.Models
+namespace NLayerApp.Blazor.WebAssembly.Models
 {
     public enum CRUDOperations
     {

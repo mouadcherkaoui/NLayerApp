@@ -1,5 +1,8 @@
 ﻿@using System.Reflection
-@using NLayer.Blazor.WebAssembly.Models
+@using System.Linq
+@using System.ComponentModel
+
+@using NLayerApp.Blazor.WebAssembly.Models
 
 @typeparam TItem
 
@@ -22,10 +25,20 @@
     protected override async Task OnInitializedAsync()
     {
         @foreach(var item in Items)
+        {
+            ((INotifyPropertyChanged)item).PropertyChanged += (sender, args) => {
+                Console.WriteLine("PropertyChanged raised:");
+                var propertyName = ((PropertyChangedEventArgs)args).PropertyName;//.GetType().GetProperties();
+                Console.WriteLine(sender.GetType().GetProperty(propertyName).GetValue(sender)); 
+                /*@foreach(var v in properties){
+                    Console.WriteLine($"{v.Name}");
+                    }*/
+            };
             @foreach(var property in typeof(TItem).GetProperties())
             {
                 Console.WriteLine(property.Name);
                 _properties.Add(property.GetValue(item));
             }
+        }
     } 
 }

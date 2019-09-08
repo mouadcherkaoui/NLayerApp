@@ -8,7 +8,7 @@
     "tasks": [
         {
             "taskName": "build",
-            "args": [ "NLayerApp.MvcApp"],
+            "args": [ "NLayerApp.Blazor.WebAssembly"],
             "isBuildCommand": true,
             "showOutput": "silent",
             "problemMatcher": "$msCompile"

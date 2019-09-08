@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NLayer.Blazor.WebAssembly
+namespace NLayerApp.Blazor.WebAssembly
 {
     public class Startup
     {

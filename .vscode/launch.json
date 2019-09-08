@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/NLayerApp.Blazor.WebAssembly/bin/Debug/netcoreapp3.0/NLayerApp.Blazor.WebAssembly.dll",
+            "program": "${workspaceRoot}/NLayerApp.Blazor.WebAssembly/bin/Debug/netstandard2.0/NLayerApp.Blazor.WebAssembly.dll",
             "args": [],
-            "cwd": "${workspaceRoot}/NLayerApp.MvcApp",
+            "cwd": "${workspaceRoot}/NLayerApp.Blazor.WebAssembly",
             "stopAtEntry": false,
             "console": "internalConsole"
         },
@@ -17,9 +17,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/NLayerApp.Blazor.WebAssembly/bin/Debug/netcoreapp3.0/NLayerApp.Blazor.WebAssembly.dll",
+            "program": "${workspaceRoot}/NLayerApp.Blazor.WebAssembly/bin/Debug/netstandard2.0/NLayerApp.Blazor.WebAssembly.dll",
             "args": [ ],
-            "cwd": "${workspaceRoot}/NLayerApp.MvcApp",
+            "cwd": "${workspaceRoot}/NLayerApp.Blazor.WebAssembly",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": true,

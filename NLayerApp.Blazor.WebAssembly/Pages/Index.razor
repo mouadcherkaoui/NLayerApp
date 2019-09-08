@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using NLayer.Blazor.WebAssembly.Models
+@using NLayerApp.Blazor.WebAssembly.Models
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
@@ -8,8 +8,8 @@ Welcome to your new app.
 <ReflectionTest Operation="CRUDOperations.Create" Items="test" TItem="Member">
     <ItemTemplate>
         <li>
-            <input type="text" value="@context.firstName"/>
-            <input type="text" value="@context.lastName"/>
+            <input type="text" @bind="@context.firstName"/>
+            <input type="text" @bind="@context.lastName"/>
         </li>
     </ItemTemplate>
 </ReflectionTest>
@@ -33,4 +33,9 @@ Welcome to your new app.
             lastName = "lastName3"
         }
     };
+
+    void InputChange(ChangeEventArgs e) {
+        Console.WriteLine(e.Value);
+        Console.WriteLine(e);
+    }
 }

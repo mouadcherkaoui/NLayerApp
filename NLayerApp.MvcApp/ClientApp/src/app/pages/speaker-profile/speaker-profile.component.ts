@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as msr from 'msr'; 
 import * as Azure from '@azure/storage-blob';
 
 @Component({

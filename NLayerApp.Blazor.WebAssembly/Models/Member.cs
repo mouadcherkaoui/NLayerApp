@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace NLayer.Blazor.WebAssembly.Models 
+namespace NLayerApp.Blazor.WebAssembly.Models 
 {
     public class Member: INotifyPropertyChanged
     {
@@ -17,7 +17,6 @@ namespace NLayer.Blazor.WebAssembly.Models
         public void RaisePropertyChanged<TValue>(ref TValue backingField, TValue value, [CallerMemberName] string propertyName = "") 
         {
             backingField = value; 
-            Console.WriteLine(propertyName);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

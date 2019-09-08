@@ -100,9 +100,9 @@ namespace NLayerApp.MvcApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    template: "/api/{controller}/{action=Index}/{id?}");
             });
-
+            
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -115,6 +115,8 @@ namespace NLayerApp.MvcApp
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+
         }
     }
 
