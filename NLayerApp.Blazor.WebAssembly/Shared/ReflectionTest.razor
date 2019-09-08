@@ -1,0 +1,31 @@
+﻿@using System.Reflection
+@using NLayer.Blazor.WebAssembly.Models
+
+@typeparam TItem
+
+<div class="alert alert-secondary mt-4" role="alert">
+    <ul>
+        @foreach (var item in Items)
+        {
+            @ItemTemplate(item)
+        }
+    </ul>
+</div>
+@code {
+    [Parameter] public string Title { get; set; }
+    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; }
+    [Parameter] public List<TItem> Items { get; set; }
+    [Parameter] public CRUDOperations Operation { get; set; }
+
+    private List<object> _properties = new List<object>();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        @foreach(var item in Items)
+            @foreach(var property in typeof(TItem).GetProperties())
+            {
+                Console.WriteLine(property.Name);
+                _properties.Add(property.GetValue(item));
+            }
+    } 
+}
