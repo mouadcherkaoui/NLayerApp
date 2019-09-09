@@ -4,13 +4,20 @@ using System.Runtime.CompilerServices;
 
 namespace NLayerApp.Blazor.WebAssembly.Models 
 {
+
     public class Member: INotifyPropertyChanged
     {
         private int _id;
-        public int Id { get=>_id; set=> RaisePropertyChanged(ref _id, value); }
         private string _firstName;
+        private string _lastName;
+
+        [DisplayName(displayName: "Id")]
+        public int Id { get=>_id; set=> RaisePropertyChanged(ref _id, value); }
+
+        [DisplayName(displayName: "First Name")]
         public string firstName { get=>_firstName; set=>RaisePropertyChanged(ref _firstName, value); }
-        private string _lastName;    
+
+        [DisplayName(displayName: "Last Name")]
         public string lastName { get=>_lastName; set=>RaisePropertyChanged(ref _lastName, value); }
 
         public event PropertyChangedEventHandler PropertyChanged;

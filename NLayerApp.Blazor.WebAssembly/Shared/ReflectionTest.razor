@@ -6,7 +6,7 @@
 
 @typeparam TItem
 
-<div class="alert alert-secondary mt-4" role="alert">
+<div class="mt-4">
     <ul>
         @foreach (var item in Items)
         {
@@ -20,24 +20,28 @@
     [Parameter] public List<TItem> Items { get; set; }
     [Parameter] public CRUDOperations Operation { get; set; }
 
-    private List<object> _properties = new List<object>();
+    private Dictionary<string, object> _properties = new Dictionary<string, object>();
     
     protected override async Task OnInitializedAsync()
     {
         @foreach(var item in Items)
         {
+            // we cast the item object to INotifyPropertyChanged to be able to subscribe to changes events
+            // and get the new Value through reflection on the sender instance
             ((INotifyPropertyChanged)item).PropertyChanged += (sender, args) => {
-                Console.WriteLine("PropertyChanged raised:");
-                var propertyName = ((PropertyChangedEventArgs)args).PropertyName;//.GetType().GetProperties();
-                Console.WriteLine(sender.GetType().GetProperty(propertyName).GetValue(sender)); 
-                /*@foreach(var v in properties){
-                    Console.WriteLine($"{v.Name}");
-                    }*/
+                Console.WriteLine($"{args.PropertyName} raised PropertyChanged: ");                                
+                Console.WriteLine(sender.GetType().GetProperty(args.PropertyName).GetValue(sender)); 
             };
             @foreach(var property in typeof(TItem).GetProperties())
             {
                 Console.WriteLine(property.Name);
-                _properties.Add(property.GetValue(item));
+                _properties.Add($"{property.Name}_{item.GetHashCode()}", property.GetValue(item));
+                _properties.Add($"_{property.Name}_{item.GetHashCode()}", property.GetCustomAttributesData());
+                property.GetCustomAttributesData().ToList().ForEach(d =>
+                {
+                    Console.WriteLine($"Custom Attribute: {d.AttributeType.ToString()}");
+                    d.NamedArguments.ToList().ForEach(a => Console.WriteLine($"{a.MemberInfo.Name}: {a.TypedValue.Value}"));
+                });
             }
         }
     } 
