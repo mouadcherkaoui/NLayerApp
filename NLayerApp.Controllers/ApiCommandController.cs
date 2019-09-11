@@ -7,13 +7,12 @@ namespace NLayerApp.Controllers
 {
     public class ApiCommandController: Controller
     {
-        Lazy<IAsyncCommand<Task<IActionResult>>> _indexCommand;
-        public ApiCommandController(params Lazy<IAsyncCommand<Task<IActionResult>>>[] commands)
+        Lazy<IAsyncCommand<IActionResult>> _indexCommand;
+        public ApiCommandController(params Lazy<IAsyncCommand<IActionResult>>[] commands)
         {
             _indexCommand = commands[0];   
-
         }
 
-        public Task<IActionResult> Index => _indexCommand.Value.ExecuteAsync();
+        public async Task<IActionResult> Index() => await _indexCommand.Value.ExecuteAsync();
     }
 }

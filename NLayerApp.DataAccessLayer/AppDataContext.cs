@@ -9,6 +9,7 @@ using NLayerApp.Models;
 using Microsoft.EntityFrameworkCore;
 using NLayerApp.DataAccessLayer.Configurations;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer
 {
@@ -52,16 +53,16 @@ namespace NLayerApp.DataAccessLayer
         {
             return base.Set<TEntity>();
         }
-        public TEntity Add<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> Add<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
         {
             entity.CreatedAt = DateTime.Now;
-            var entry = this.Set<TEntity>().Add(entity);
-            return (TEntity)entry.Entity;
+            var entry = await Set<TEntity>().AddAsync(entity);
+            return entry.Entity;
         }
 
-        public TEntity UpdateEntity<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> UpdateEntity<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
         {
-            var entry = this.Set<TEntity>().Find(entity.Id);
+            var entry = await Set<TEntity>().FindAsync(entity.Id);
             foreach (var current in entity.GetType().GetProperties().Where(p => p.Name != "Item"))
             {
                 current.SetValue(entry, current.GetValue(entity));
@@ -72,11 +73,11 @@ namespace NLayerApp.DataAccessLayer
             return entry;
         }
 
-        public bool DeleteEntity<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
+        public async Task<bool> DeleteEntity<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
         {
             var entityToRemove = 
-                this.Set<TEntity>()
-                    ?.FirstOrDefault(e => e.Id.Equals(key));
+                await Set<TEntity>()
+                    ?.FirstOrDefaultAsync(e => e.Id.Equals(key));
             if(entityToRemove == null)
                 return false;
             
@@ -100,7 +101,12 @@ namespace NLayerApp.DataAccessLayer
             return true;
         }
 
+        public async Task<int> SaveAsync()
+        {
+            return await base.SaveChangesAsync();
+        }
 
-        #endregion        
+
+        #endregion
     }
 }

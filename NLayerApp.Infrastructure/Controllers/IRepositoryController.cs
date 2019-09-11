@@ -1,4 +1,5 @@
 using NLayerApp.Infrastructure.Models;
+using System.Threading.Tasks;
 
 namespace NLayerApp.Infrastructure.Controllers
 {
@@ -12,6 +13,6 @@ namespace NLayerApp.Infrastructure.Controllers
          TResult Add(TEntity entity);
          TResult Update(TKey id);
          TResult Update(TKey id, TEntity entity);
-         TResult Delete(TKey id);
+         Task<TResult> Delete(TKey id);
     }
 }

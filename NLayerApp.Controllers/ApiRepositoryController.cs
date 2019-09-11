@@ -6,6 +6,7 @@ using NLayerApp.Infrastructure.Models;
 using NLayerApp.Infrastructure.Controllers;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Threading.Tasks;
 
 namespace NLayerApp.Controllers
 {
@@ -65,9 +66,9 @@ namespace NLayerApp.Controllers
         }
 
         [HttpDelete("{id}")]
-        public virtual IActionResult Delete(TKey id)
+        public virtual async Task<IActionResult> Delete(TKey id)
         {
-            var result = _repository.DeleteEntity(id);
+            var result = await _repository.DeleteEntityAsync(id);
             if(result)
             {
                 return Accepted();

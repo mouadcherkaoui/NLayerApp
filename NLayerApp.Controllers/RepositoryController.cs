@@ -6,6 +6,7 @@ using NLayerApp.Infrastructure.Repositories;
 using NLayerApp.Controllers.Attributes;
 using NLayerApp.Views.ViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NLayerApp.Controllers
 {
@@ -136,9 +137,9 @@ namespace NLayerApp.Controllers
 
         [Route("[action]/{id}")]
         [HttpDelete]
-        public IActionResult Delete(TKey id)
+        public async Task<IActionResult> Delete(TKey id)
         {
-            var result = _repository.DeleteEntity(id);
+            var result = await _repository.DeleteEntityAsync(id);
             if(result)
             {
                 return RedirectToAction("Index");

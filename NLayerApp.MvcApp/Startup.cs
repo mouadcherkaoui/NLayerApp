@@ -63,7 +63,6 @@ namespace NLayerApp.MvcApp
             services.RegisterTypedRepositories(new Type[]{typeof(Member), typeof(Group), typeof(Subject), typeof(Room)});
             services
                 .AddMvc(o => o.Conventions.Add(new GeneratedControllerNameConvention()))
-                .ConfigureApplicationPartManager(m => m.FeatureProviders.Add(new GeneratedControllerFeatureProvider()))
                 .UseDynamicControllers()
                 .AddControllersAsServices()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

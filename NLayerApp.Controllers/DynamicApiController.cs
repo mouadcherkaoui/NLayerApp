@@ -3,6 +3,7 @@ using NLayerApp.Infrastructure.DataAccessLayer;
 using NLayerApp.Infrastructure.Models;
 using NLayerApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace NLayerApp.Controllers.Rest
 {
@@ -28,6 +29,6 @@ namespace NLayerApp.Controllers.Rest
         public override IActionResult Put([FromBody]TEntity entity) => base.Put(entity);
 
         [HttpDelete("{id}")]
-        public override IActionResult Delete(TKey id) => base.Delete(id);
+        public override async Task<IActionResult> Delete(TKey id) => await base.Delete(id);
     }
 }

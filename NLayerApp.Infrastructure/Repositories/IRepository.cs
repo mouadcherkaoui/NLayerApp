@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using NLayerApp.Infrastructure.Models;
 
 namespace NLayerApp.Infrastructure.Repositories
@@ -7,7 +8,7 @@ namespace NLayerApp.Infrastructure.Repositories
         where TEntity : class, IEntity, IEntity<TKey>
     {
         TEntity AddEntity(TEntity entity);
-        bool DeleteEntity(TKey key);
+        Task<bool> DeleteEntityAsync(TKey key);
         TEntity GetEntity(TKey key);
         IQueryable<TEntity> GetEntities();
         TEntity UpdateEntity(TEntity entity);         

@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.Infrastructure.CQRS
 {
-    public interface IAsyncCommand<out TResult>
+    public interface IAsyncCommand<TResult>
     {
-        TResult ExecuteAsync();
+        Task<TResult> ExecuteAsync();
     }
     public interface IAsyncCommand<T, out TResult>
     {

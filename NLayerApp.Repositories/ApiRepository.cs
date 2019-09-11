@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using NLayerApp.Infrastructure.DataAccessLayer;
 using NLayerApp.Infrastructure.Models;
 using NLayerApp.Infrastructure.Repositories;
@@ -17,15 +18,15 @@ namespace NLayerApp.Repositories
         }
         public TEntity AddEntity(TEntity entity)
         {
-            var newEntity = _context.Add<TEntity, TKey>(entity);
+            var newEntity = _context.Add<TEntity, TKey>(entity).Result;
             _context.Save();
 
             return newEntity;
         }
 
-        public bool DeleteEntity(TKey key)
+        public async Task<bool> DeleteEntityAsync(TKey key)
         {
-            var result = _context.DeleteEntity<TEntity, TKey>(key);
+            var result = await _context.DeleteEntity<TEntity, TKey>(key);
             _context.Save();
 
             return result;
@@ -45,7 +46,7 @@ namespace NLayerApp.Repositories
 
         public TEntity UpdateEntity(TEntity entity)
         {
-            entity = _context.UpdateEntity<TEntity, TKey>(entity);
+            entity = _context.UpdateEntity<TEntity, TKey>(entity).Result;
             _context.Save();
             
             return entity;
