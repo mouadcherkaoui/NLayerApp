@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer
 {
-    public class AppDataContext : DbContext, IContext
+    public class AppDbContext : DbContext, IContext
     {
         private readonly string _connectionString = @"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;";         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,6 +53,7 @@ namespace NLayerApp.DataAccessLayer
         {
             return base.Set<TEntity>();
         }
+
         public async Task<TEntity> Add<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
         {
             entity.CreatedAt = DateTime.Now;
@@ -90,6 +91,7 @@ namespace NLayerApp.DataAccessLayer
             this.Set<TEntity>().Remove(entity);
             return true;
         }        
+
         public void Save()
         {
             base.SaveChanges();

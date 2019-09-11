@@ -8,7 +8,6 @@ namespace NLayerApp.Models
 {
     public class Member : IEntity, IEntity<int>
     {
-        public object this[string index] => this.GetType().GetProperty(index).GetValue(this, null);
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

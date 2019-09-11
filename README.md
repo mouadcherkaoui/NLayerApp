@@ -1,5 +1,9 @@
 # netcore NLayerApp example 
 
+this project was based on a set of experiences on the netcore and aspnetcore features and capabilities, and will lack the comments and XML documentation, now I'm working on it 
+to make it a example and a starting point for an N-Layer application, which will give me the possibility to apply best practices and patterns, and also to review and correct the 
+anti-pattern parts, also I'll soonly update to CQRS using MediatR package.
+
 ## Tools :
 
 - dotnet core runtime and sdk.
