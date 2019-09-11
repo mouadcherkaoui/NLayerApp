@@ -10,7 +10,7 @@ namespace NLayerApp.Infrastructure.Repositories
         TEntity AddEntity(TEntity entity);
         Task<bool> DeleteEntityAsync(TKey key);
         Task<TEntity> GetEntity(TKey key);
-        IQueryable<TEntity> GetEntities();
+        Task<IQueryable<TEntity>> GetEntities();
         TEntity UpdateEntity(TEntity entity);         
     }    
 }

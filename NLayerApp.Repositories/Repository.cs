@@ -16,9 +16,9 @@ namespace NLayerApp.Repositories
             _context = context;
         }
 
-        public IQueryable<TEntity> GetEntities()  
+        public async Task<IQueryable<TEntity>> GetEntities()  
         {
-            var entities = _context.GetEntitiesAsync<TEntity, TKey>();
+            var entities = await _context.GetEntitiesAsync<TEntity, TKey>();
             return entities;
         }
 

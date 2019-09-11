@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MediatR;
+using System.Threading;
 
 namespace NLayerApp.DataAccessLayer.Commands
 {
@@ -27,6 +29,25 @@ namespace NLayerApp.DataAccessLayer.Commands
                 await context.SaveAsync();
                 return result; 
             }
+        }
+    }
+
+    public class EntityRequest<TEntity, TResponse> : IRequest<TResponse>
+    {
+        // IMappingConfig
+        // IMapFrom<>
+        // IMapTo<>
+        TEntity _entity;
+        public EntityRequest(TEntity entity)
+        {
+            _entity = entity;
+        }
+    }
+    public class EntityCommand<TEntity, TResponse> : IRequestHandler<EntityRequest<TEntity, TResponse>, TResponse>
+    {
+        public Task<TResponse> Handle(EntityRequest<TEntity, TResponse> request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

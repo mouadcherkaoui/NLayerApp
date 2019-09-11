@@ -49,7 +49,7 @@ namespace NLayerApp.DataAccessLayer
             return this.Set<TEntity>()
                 ?.Where(expression);
         }        
-        public IQueryable<TEntity> GetAll<TEntity, TKey>() where TEntity : class, IEntity<TKey>
+        public async Task<IQueryable<TEntity>> GetEntitiesAsync<TEntity, TKey>() where TEntity : class, IEntity<TKey>
         {
             return base.Set<TEntity>();
         }
