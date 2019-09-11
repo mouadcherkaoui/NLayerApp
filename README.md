@@ -12,7 +12,7 @@
 - on a command prompt go to the folder ./NLayerApp.MvcApp
 - run : 
     dotnet restore
-- run : dotnet ef database update --project ../NetLayerApp.DataAccessLayer/NetLayerApp.DataAccessLayer.csproj
+- run : dotnet ef database update --project ../NLayerApp.DataAccessLayer/NLayerApp.DataAccessLayer.csproj
 
 the instance of Sql Server i use is the default one on the express edition : ./SQLExpress
 if you have another name you must update the connection string on "NLayerApp.MvcApp/appSettings.json" and "NLayerApp.DataAccessLayer/AppDataContext.cs"
