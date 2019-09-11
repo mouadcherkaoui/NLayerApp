@@ -18,3 +18,5 @@ the instance of Sql Server i use is the default one on the express edition : ./S
 if you have another name you must update the connection string on "NLayerApp.MvcApp/appSettings.json" and "NLayerApp.DataAccessLayer/AppDataContext.cs"
 
 ## Project Structure:
+
+ ![](/FSharpDeveloper/NLayerApp/blob/master/images/NLayerApp-Structure.png?raw=true)
