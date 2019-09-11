@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer.Queries
 {
-    public class GetEntityRequest<TEntity, TKey> : IAsyncCommand<TEntity>
+    public class GetEntityRequest<TEntity, TKey> : IAsyncCommandHandler<TEntity>
         where TEntity: class, IEntity<TKey>
     {
         IContext _context;

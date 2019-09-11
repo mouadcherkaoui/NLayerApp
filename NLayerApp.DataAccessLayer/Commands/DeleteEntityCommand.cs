@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer.Commands
 {
-    public class DeleteEntityCommand<TEntity, TKey> : IAsyncCommand<bool>
+    public class DeleteEntityCommand<TEntity, TKey> : IAsyncCommandHandler<bool>
         where TEntity: class, IEntity<TKey>
     {
         // TDTObject _dtobject;

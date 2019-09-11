@@ -18,7 +18,7 @@ namespace NLayerApp.Repositories
 
         public IQueryable<TEntity> GetEntities()  
         {
-            var entities = _context.GetAll<TEntity, TKey>();
+            var entities = _context.GetEntitiesAsync<TEntity, TKey>();
             return entities;
         }
 

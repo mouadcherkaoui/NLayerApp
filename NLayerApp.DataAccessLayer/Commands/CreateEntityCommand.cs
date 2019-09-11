@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer.Commands
 {
-    public class CreateEntityCommand<TEntity, TKey> : IAsyncCommand<TEntity>
+    public class CreateEntityCommand<TEntity, TKey> : IAsyncCommandHandler<TEntity>
         where TEntity: class, IEntity<TKey>
     {
         // TDTObject _dtobject;

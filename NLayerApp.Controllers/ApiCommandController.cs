@@ -7,8 +7,8 @@ namespace NLayerApp.Controllers
 {
     public class ApiCommandController: Controller
     {
-        Lazy<IAsyncCommand<IActionResult>> _indexCommand;
-        public ApiCommandController(params Lazy<IAsyncCommand<IActionResult>>[] commands)
+        Lazy<IAsyncCommandHandler<IActionResult>> _indexCommand;
+        public ApiCommandController(params Lazy<IAsyncCommandHandler<IActionResult>>[] commands)
         {
             _indexCommand = commands[0];   
         }
