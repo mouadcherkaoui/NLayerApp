@@ -39,9 +39,9 @@ namespace NLayerApp.DataAccessLayer
         }
         #region IContext Members
 
-        public TEntity Get<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> GetEntityAsync<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
         {
-            return base.Set<TEntity>().FirstOrDefault(e => e.Id.Equals(key));
+            return await base.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.Equals(key));
         }        
 
         public IQueryable<TEntity> GetAll<TEntity, TKey>(Expression<Func<TEntity, bool>> expression) where TEntity : class, IEntity<TKey>

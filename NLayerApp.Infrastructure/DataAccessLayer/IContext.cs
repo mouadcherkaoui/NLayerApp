@@ -10,7 +10,7 @@ namespace NLayerApp.Infrastructure.DataAccessLayer
     public interface IContext: IDisposable
     {
         Task<TEntity> Add<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>;        
-        TEntity Get<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>;
+        Task<TEntity> GetEntityAsync<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>;
 
         IQueryable<TEntity> GetAll<TEntity, TKey>() where TEntity : class, IEntity<TKey>;
         IQueryable<TEntity> GetAll<TEntity, TKey>(Expression<Func<TEntity, bool>> expression) where TEntity : class, IEntity<TKey>;

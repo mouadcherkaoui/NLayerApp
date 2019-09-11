@@ -20,7 +20,7 @@ namespace NLayerApp.Controllers.Rest
         public override IActionResult Get() => base.Get();
 
         [HttpGet("{id}")]
-        public override IActionResult Get(TKey id) => base.Get(id);
+        public override async Task<IActionResult> Get(TKey id) => await base.Get(id);
 
         [HttpPost]
         public override IActionResult Post([FromBody]TEntity entity) => base.Post(entity);

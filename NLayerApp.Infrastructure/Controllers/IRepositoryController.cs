@@ -7,7 +7,7 @@ namespace NLayerApp.Infrastructure.Controllers
         where TEntity: IEntity<TKey>
     {
          TResult Index();
-         TResult Index(TKey id);
+         Task<TResult> Index(TKey id);
         //  TResult Details(TKey id);
          TResult Add();
          TResult Add(TEntity entity);

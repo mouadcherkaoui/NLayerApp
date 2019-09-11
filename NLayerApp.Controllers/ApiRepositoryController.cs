@@ -30,12 +30,12 @@ namespace NLayerApp.Controllers
         
         [HttpGet("{id:int}")]
         [Produces("application/json")]
-        public virtual IActionResult Get(TKey id)
+        public virtual async Task<IActionResult> Get(TKey id)
         {
             var isHatoas = Request.Headers.ContainsKey("Accept") 
                 && Request.Headers["Accept"] .ToString().ToLower().EndsWith("hateoas");
             
-            var result = _repository.GetEntity(id);
+            var result = await _repository.GetEntity(id);
             if(result == null) return NoContent();
             
             return isHatoas 

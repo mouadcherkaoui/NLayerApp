@@ -7,7 +7,7 @@ namespace NLayerApp.Infrastructure.Controllers
         where TEntity: IEntity, IEntity<TKey>
     {
          TResult Get();
-         TResult Get(TKey id);
+         Task<TResult> Get(TKey id);
          TResult Post(TEntity entity);
          TResult Put(TEntity entity);
          Task<TResult> Delete(TKey id);

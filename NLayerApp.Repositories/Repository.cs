@@ -22,9 +22,9 @@ namespace NLayerApp.Repositories
             return entities;
         }
 
-        public TEntity GetEntity(TKey key)
+        public async Task<TEntity> GetEntity(TKey key)
         {
-            return _context.Get<TEntity, TKey>(key);
+            return await _context.GetEntityAsync<TEntity, TKey>(key);
         }
 
         public TEntity AddEntity(TEntity entity)

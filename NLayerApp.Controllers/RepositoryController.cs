@@ -29,7 +29,7 @@ namespace NLayerApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {            
-            var result = _repository.GetEntities()?.ToList();  
+            var result = _repository.GetEntities();  
             
             var viewResult = View("Dynamic/Index", 
                 new DynamicEntityComponentViewModel(result){
@@ -41,9 +41,9 @@ namespace NLayerApp.Controllers
 
         [Route("Index/{id}")]
         [HttpGet]
-        public IActionResult Index(TKey id)
+        public async Task<IActionResult> Index(TKey id)
         {
-            var entity = _repository.GetEntity(id);
+            var entity = await _repository.GetEntity(id);
 
             if ( entity == null) return NotFound();
 
