@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
+using System.IO;
 
 namespace NLayerApp.Blazor.WebAssembly.Models
 {
@@ -13,6 +14,7 @@ namespace NLayerApp.Blazor.WebAssembly.Models
             _value = value;
             _properties = typeof(T).GetProperties().ToDictionary(t => t.Name,
                 t => t.GetValue(_value));
+
         }
         public object this[string index]
         {

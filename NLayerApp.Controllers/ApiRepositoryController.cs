@@ -50,7 +50,7 @@ namespace NLayerApp.Controllers
                 _repository.AddEntity(entity);
                 return CreatedAtAction("Get", new { entity });
             }
-            return NoContent();
+            return BadRequest(ModelState.Values);
         }
         
         [HttpPut()]

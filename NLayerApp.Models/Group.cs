@@ -11,7 +11,7 @@ namespace NLayerApp.Models
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Member> Members { get; set; }
+        public virtual IEnumerable<GroupMembers> Members { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
     }

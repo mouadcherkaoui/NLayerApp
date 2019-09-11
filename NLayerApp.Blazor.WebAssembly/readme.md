@@ -1,1 +1,2 @@
-this project takes advantage of the new blazor packages that support Wasm.
+#Blazor Web Assembly frontend: 
+##

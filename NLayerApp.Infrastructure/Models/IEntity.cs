@@ -12,4 +12,8 @@ namespace NLayerApp.Infrastructure.Models
     {
         TKey Id { get; set; }
     }
+
+        public interface IManyToManyEntity<TType, TKey> : IEntity<TKey>, IEntity
+        {
+        }
 }

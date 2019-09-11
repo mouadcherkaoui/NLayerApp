@@ -7,7 +7,8 @@ using NLayerApp.Infrastructure.DataAccessLayer;
 using NLayerApp.Infrastructure.Models;
 using NLayerApp.Models;
 using Microsoft.EntityFrameworkCore;
-
+using NLayerApp.DataAccessLayer.Configurations;
+using System.Diagnostics;
 
 namespace NLayerApp.DataAccessLayer
 {
@@ -22,6 +23,7 @@ namespace NLayerApp.DataAccessLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            Debugger.Break();
             var assembly = typeof(BaseEntity).GetTypeInfo().Assembly;
             var types = assembly.DefinedTypes.Where(t => t.GetInterfaces().Contains(typeof(IEntity)) && t.IsClass && !t.IsAbstract).ToList();
             foreach (var current in types)
@@ -29,6 +31,10 @@ namespace NLayerApp.DataAccessLayer
                 if(modelBuilder.Model.FindEntityType(current.AsType()) == null)
                     modelBuilder.Entity(current.AsType());
             }
+
+            modelBuilder.ApplyConfiguration<Group>(new GroupConfiguration());
+            modelBuilder.ApplyConfiguration<Member>(new MemberConfiguration());
+            modelBuilder.ApplyConfiguration<GroupMembers>(new GroupMembersConfiguration());            
         }
         #region IContext Members
 
