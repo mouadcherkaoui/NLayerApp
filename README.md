@@ -19,4 +19,4 @@ if you have another name you must update the connection string on "NLayerApp.Mvc
 
 ## Project Structure:
 
- ![](/FSharpDeveloper/NLayerApp/blob/master/images/NLayerApp-Structure.png?raw=true)
+ ![NLayerApp-Structure](FSharpDeveloper/NLayerApp/blob/master/images/NLayerApp-Structure.png?raw=true)
