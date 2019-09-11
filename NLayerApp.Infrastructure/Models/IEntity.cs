@@ -4,7 +4,6 @@ namespace NLayerApp.Infrastructure.Models
 {
     public interface IEntity
     {
-        object this[string index]{ get; }
         DateTime CreatedAt { get; set; }
         DateTime ModifiedAt { get; set; }
     }
@@ -13,7 +12,7 @@ namespace NLayerApp.Infrastructure.Models
         TKey Id { get; set; }
     }
 
-        public interface IManyToManyEntity<TType, TKey> : IEntity<TKey>, IEntity
-        {
-        }
+    public interface IManyToManyEntity<TType, TKey> : IEntity<TKey>, IEntity
+    {
+    }
 }

@@ -37,7 +37,5 @@ namespace NLayerApp.Models
         //public abstract TKey Id { get; set; }
         public abstract DateTime CreatedAt { get; set; }
         public abstract DateTime ModifiedAt { get; set; }
-
-        object IEntity.this[string index] => throw new NotImplementedException();
     }
 }
