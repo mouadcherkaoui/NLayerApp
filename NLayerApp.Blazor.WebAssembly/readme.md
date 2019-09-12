@@ -1,2 +1,0 @@
-#Blazor Web Assembly frontend: 
-##

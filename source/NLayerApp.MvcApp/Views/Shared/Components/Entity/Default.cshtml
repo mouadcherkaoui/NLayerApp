@@ -1,0 +1,18 @@
+
+@model NLayerApp.Views.ViewModels.EntityComponentViewModel
+
+
+<ul class="list-group">
+@foreach(var current in Model.Properties.Where(p => p.Key.Name != "Id" && p.Key.Name != "CreatedAt" && p.Key.Name != "ModifiedAt")){
+    var value = Model.ModelInstance != null ? current.Key.GetValue(Model.ModelInstance) : "";
+    <li class="list-group-item">
+        <label>@current.Key.Name</label> 
+        @if(Model.ViewType == "Edit"){
+        <input type="@current.Value" name="@current.Key.Name" value=@value>
+        }else{
+        <span>@value</span>
+        }
+    </li>
+}
+</ul>
+</br>

@@ -1,0 +1,33 @@
+@model FeaturesViewModel
+
+<h3>Controllers</h3>
+<ul>
+    @foreach(var current in Model.Controllers)
+    {
+        <li>@current.Name</li>
+    }
+</ul>
+
+<h3>ViewComponents</h3>
+<ul>
+    @foreach(var current in Model.ViewComponents)
+    {
+        <li>@current.Name</li>
+    }
+</ul>
+
+<h3>TagHelpers</h3>
+<ul>
+    @foreach(var current in Model.TagHelpers)
+    {
+        <li>@current.Name</li>
+    }
+</ul>
+
+<h3>MetadataReferences</h3>
+<ul>
+    @foreach(var current in Model.MetadataReferences)
+    {
+        <li>@current.Display.Split('\\').Last()</li>
+    }
+</ul>

@@ -1,0 +1,39 @@
+﻿@using Markdig
+@using System.IO
+@using System.Threading.Tasks
+@inject HttpClient Http
+
+<div class="mt-4">
+    @((MarkupString)RenderHtmlContent(Content))
+</div>
+
+@code {
+    // Demonstrates how a parent component can supply parameters
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string MarkdownHtml { get; set; }
+    [Parameter] public string Content { get; set; } = "";
+    [Parameter] public string FromUrl { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Content = await Http.GetStringAsync("markdowns/readme.md");
+        if(Content == null) {
+            Content = String.IsNullOrEmpty(FromUrl)
+                ? "Content or FromUrl property is not set or invalid"
+                : await InitContentFromUrl();
+        }
+    }
+
+    private async Task<string>
+    InitContentFromUrl()
+    {
+    HttpResponseMessage httpResponse = await Http.GetAsync(FromUrl);
+    return httpResponse.IsSuccessStatusCode
+    ? await httpResponse.Content.ReadAsStringAsync()
+    : httpResponse.ReasonPhrase;
+    }
+
+    private string RenderHtmlContent(string value) => Markdig.Markdown.ToHtml(
+    markdown: value,
+    pipeline: new MarkdownPipelineBuilder().UseAdvancedExtensions().Build());
+    }
