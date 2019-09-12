@@ -1,4 +1,6 @@
-*/*/bin
-*/*/obj
-*/*/node_modules
-*/*/NLayerApp.MvcApp\ClientApp\node_modules
+**/.vs
+**/.ionide
+**/bin
+**/obj
+**/node_modules
+**/NLayerApp.MvcApp\ClientApp\node_modules
