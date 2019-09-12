@@ -13,6 +13,8 @@ using NLayerApp.DataAccessLayer;
 using NLayerApp.Infrastructure.DataAccessLayer;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.Annotations;
+using NLayerApp.DataAccessLayer.Configurations;
+using System.Collections.Generic;
 
 namespace NLayerApp.MvcApp
 {
@@ -28,7 +30,16 @@ namespace NLayerApp.MvcApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IContext, AppDataContext>();
+            var types =
+                new Dictionary<Type, Type> {
+                    { typeof(Member), typeof(MemberConfiguration) },
+                    { typeof(Group),typeof(GroupConfiguration) },
+                    { typeof(GroupMembers), typeof(GroupMembersConfiguration) },
+                    { typeof(Subject), null },
+                    { typeof(Room), null }
+                }; 
+
+            services.AddSingleton<IContext>(new AppDbContext(@"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;", types));
             // services.
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -114,7 +125,6 @@ namespace NLayerApp.MvcApp
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
 
         }
     }

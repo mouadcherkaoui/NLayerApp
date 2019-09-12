@@ -15,7 +15,16 @@ namespace NLayerApp.DataAccessLayer
 {
     public class AppDbContext : DbContext, IContext
     {
-        private readonly string _connectionString = @"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;";         
+        private readonly string _connectionString;
+        private readonly Dictionary<Type, Type> _types;
+        private readonly Type[] _typeConfigs;
+
+        public AppDbContext(string connectionString, Dictionary<Type, Type> types)
+        {
+            _connectionString = connectionString;
+            _types = types;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
@@ -24,19 +33,22 @@ namespace NLayerApp.DataAccessLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Debugger.Break();
-            var assembly = typeof(BaseEntity).GetTypeInfo().Assembly;
-            var types = assembly.DefinedTypes.Where(t => t.GetInterfaces().Contains(typeof(IEntity)) && t.IsClass && !t.IsAbstract).ToList();
-            foreach (var current in types)
-            {
-                if(modelBuilder.Model.FindEntityType(current.AsType()) == null)
-                    modelBuilder.Entity(current.AsType());
-            }
+            // Debugger.Break();
+            var applyConfig = modelBuilder.GetType()
+                .GetMethods().Where(m => m.Name.StartsWith("ApplyConfiguration"))
+                .FirstOrDefault();
 
-            modelBuilder.ApplyConfiguration<Group>(new GroupConfiguration());
-            modelBuilder.ApplyConfiguration<Member>(new MemberConfiguration());
-            modelBuilder.ApplyConfiguration<GroupMembers>(new GroupMembersConfiguration());            
+            foreach (var current in _types)
+            {
+                if (modelBuilder.Model.FindEntityType(current.Key) == null)
+                {
+                    var entityTypeBuilder = modelBuilder.Entity(current.Key);
+                    //current.Value.GetMethod("Configure", new Type[] { typeof(ModelBuilder).MakeByRefType() }).Invoke(current.Value, new[] { modelBuilder });
+                    applyConfig.MakeGenericMethod(current.Key).Invoke(modelBuilder, new[] { Activator.CreateInstance(current.Value) });
+                }
+            }
         }
+
         #region IContext Members
 
         public async Task<TEntity> GetEntityAsync<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
