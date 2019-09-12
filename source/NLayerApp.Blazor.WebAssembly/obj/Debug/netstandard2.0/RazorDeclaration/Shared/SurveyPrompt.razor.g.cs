@@ -63,4 +63,9 @@ using NLayerApp.Blazor.WebAssembly.Shared;
        
     // Demonstrates how a parent component can supply parameters
     [Parameter] public string Title { get; set; }
-
+
+#line default
+#line hidden
+    }
+}
+#pragma warning restore 1591

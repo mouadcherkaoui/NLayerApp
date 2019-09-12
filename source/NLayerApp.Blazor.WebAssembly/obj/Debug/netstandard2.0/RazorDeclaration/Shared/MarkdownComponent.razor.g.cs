@@ -107,4 +107,7 @@ using System.Threading.Tasks;
 
 #line default
 #line hidden
-        [global::Microsoft.AspNetCore.Components.Injec
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
+    }
+}
+#pragma warning restore 1591

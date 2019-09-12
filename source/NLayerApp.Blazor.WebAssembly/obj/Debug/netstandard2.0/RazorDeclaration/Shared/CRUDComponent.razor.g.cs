@@ -108,4 +108,12 @@ using NLayerApp.Blazor.WebAssembly.Models;
 
 #line default
 #line hidden
-#line 39 "c:\Users\Administrator\nlayerapp\NLayerApp\source\NLayerApp.Blazor.WebAssembly\Shar
+#line 39 "c:\Users\Administrator\nlayerapp\NLayerApp\source\NLayerApp.Blazor.WebAssembly\Shared\CRUDComponent.razor"
+             
+    } 
+
+#line default
+#line hidden
+    }
+}
+#pragma warning restore 1591

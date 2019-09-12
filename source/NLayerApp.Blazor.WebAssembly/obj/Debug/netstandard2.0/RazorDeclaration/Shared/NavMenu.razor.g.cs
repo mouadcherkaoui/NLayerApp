@@ -69,4 +69,9 @@ using NLayerApp.Blazor.WebAssembly.Shared;
     {
         collapseNavMenu = !collapseNavMenu;
     }
-
+
+#line default
+#line hidden
+    }
+}
+#pragma warning restore 1591

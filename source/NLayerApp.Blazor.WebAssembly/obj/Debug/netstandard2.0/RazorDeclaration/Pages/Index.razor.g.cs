@@ -89,4 +89,10 @@ using NLayerApp.Blazor.WebAssembly.Models;
     void InputChange(ChangeEventArgs e) {
         Console.WriteLine(e.Value);
         Console.WriteLine(e);
- 
+    }
+
+#line default
+#line hidden
+    }
+}
+#pragma warning restore 1591

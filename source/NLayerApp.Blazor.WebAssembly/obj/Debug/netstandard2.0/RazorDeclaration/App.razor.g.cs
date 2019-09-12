@@ -58,4 +58,7 @@ using NLayerApp.Blazor.WebAssembly.Shared;
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
         {
         }
-        #pragma
+        #pragma warning restore 1998
+    }
+}
+#pragma warning restore 1591

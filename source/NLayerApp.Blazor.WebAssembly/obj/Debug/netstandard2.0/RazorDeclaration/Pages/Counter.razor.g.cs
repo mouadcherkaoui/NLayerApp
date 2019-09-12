@@ -68,4 +68,9 @@ using NLayerApp.Blazor.WebAssembly.Shared;
     {
         currentCount++;
     }
-
+
+#line default
+#line hidden
+    }
+}
+#pragma warning restore 1591

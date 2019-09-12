@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Administrator\\nlayerapp\\NLayerApp\\NLayerApp.Blazor.Server\\NLayer.Blazor.ServerApp.csproj",
+  "FilePath": "c:\\Users\\Administrator\\nlayerapp\\NLayerApp\\source\\NLayerApp.Blazor.Server\\NLayer.Blazor.ServerApp.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -9413,6 +9413,59 @@
         }
       },
       {
+        "Kind": "Components.Splat",
+        "Name": "Attributes",
+        "AssemblyName": "Microsoft.AspNetCore.Components",
+        "Documentation": "Merges a collection of attributes into the current element or component.",
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "*",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [
+              {
+                "Name": "@attributes",
+                "NameComparison": 0,
+                "Value": null,
+                "ValueComparison": 0,
+                "Diagnostics": [],
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Splat",
+            "Name": "@attributes",
+            "TypeName": "System.Object",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": "Merges a collection of attributes into the current element or component.",
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Attributes",
+              "Common.DirectiveAttribute": "True"
+            },
+            "BoundAttributeParameters": []
+          }
+        ],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Splat",
+          "Common.ClassifyAttributesOnly": "True",
+          "Common.TypeName": "Microsoft.AspNetCore.Components.Attributes"
+        }
+      },
+      {
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.Razor",
@@ -14699,7 +14752,7 @@
         "Kind": "Components.Ref",
         "Name": "Ref",
         "AssemblyName": "Microsoft.AspNetCore.Components",
-        "Documentation": "Generates the specified field, and populates it during rendering with a reference to the element or component.",
+        "Documentation": "Populates the specified field or property with a reference to the element or component.",
         "TagOutputHint": null,
         "CaseSensitive": true,
         "TagMatchingRules": [
@@ -14730,25 +14783,13 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "Generates the specified field, and populates it during rendering with a reference to the element or component.",
+            "Documentation": "Populates the specified field or property with a reference to the element or component.",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Ref",
               "Common.DirectiveAttribute": "True"
             },
-            "BoundAttributeParameters": [
-              {
-                "Kind": "Components.Ref",
-                "Name": "suppressField",
-                "TypeName": "System.Boolean",
-                "IsEnum": false,
-                "Documentation": "Suppresses the generation of a field by '@ref'. Specify '@ref:suppressField' to define your own property or field.",
-                "Diagnostics": [],
-                "Metadata": {
-                  "Common.PropertyName": "SuppressField"
-                }
-              }
-            ]
+            "BoundAttributeParameters": []
           }
         ],
         "AllowedChildTags": [],
@@ -14758,6 +14799,59 @@
           "Components.IsSpecialKind": "Components.Ref",
           "Common.ClassifyAttributesOnly": "True",
           "Common.TypeName": "Microsoft.AspNetCore.Components.Ref"
+        }
+      },
+      {
+        "Kind": "Components.Key",
+        "Name": "Key",
+        "AssemblyName": "Microsoft.AspNetCore.Components",
+        "Documentation": "Ensures that the component or element will be preserved across renders if (and only if) the supplied key value matches.",
+        "TagOutputHint": null,
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "*",
+            "ParentTag": null,
+            "TagStructure": 0,
+            "Attributes": [
+              {
+                "Name": "@key",
+                "NameComparison": 0,
+                "Value": null,
+                "ValueComparison": 0,
+                "Diagnostics": [],
+                "Metadata": {
+                  "Common.DirectiveAttribute": "True"
+                }
+              }
+            ],
+            "Diagnostics": []
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Key",
+            "Name": "@key",
+            "TypeName": "System.Object",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": "Ensures that the component or element will be preserved across renders if (and only if) the supplied key value matches.",
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "Key",
+              "Common.DirectiveAttribute": "True"
+            },
+            "BoundAttributeParameters": []
+          }
+        ],
+        "AllowedChildTags": [],
+        "Diagnostics": [],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Components.IsSpecialKind": "Components.Key",
+          "Common.ClassifyAttributesOnly": "True",
+          "Common.TypeName": "Microsoft.AspNetCore.Components.Key"
         }
       }
     ],

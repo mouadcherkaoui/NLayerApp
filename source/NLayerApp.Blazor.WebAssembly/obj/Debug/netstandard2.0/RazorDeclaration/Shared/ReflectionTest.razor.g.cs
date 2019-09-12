@@ -127,4 +127,12 @@ using NLayerApp.Blazor.WebAssembly.Models;
 
 #line default
 #line hidden
-#line 46 "c:\Users\Administrator\nlayerapp\NLayerApp\source\NLayerApp.Blazor.WebAss
+#line 46 "c:\Users\Administrator\nlayerapp\NLayerApp\source\NLayerApp.Blazor.WebAssembly\Shared\ReflectionTest.razor"
+         
+    } 
+
+#line default
+#line hidden
+    }
+}
+#pragma warning restore 1591

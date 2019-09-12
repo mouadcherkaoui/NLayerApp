@@ -58,4 +58,7 @@ using NLayerApp.Blazor.WebAssembly.Shared;
         protected void Execute()
         {
         }
-        #pragma
+        #pragma warning restore 1998
+    }
+}
+#pragma warning restore 1591
