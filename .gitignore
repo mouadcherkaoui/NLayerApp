@@ -1,6 +1,7 @@
 **/.vs
+**/.vscode
 **/.ionide
 **/bin
 **/obj
 **/node_modules
-**/NLayerApp.MvcApp\ClientApp\node_modules
+**/NLayerApp.MvcApp/ClientApp/node_modules
