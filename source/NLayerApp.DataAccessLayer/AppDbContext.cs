@@ -43,9 +43,9 @@ namespace NLayerApp.DataAccessLayer
                 if (modelBuilder.Model.FindEntityType(current.Key) == null)
                 {
                     var entityTypeBuilder = modelBuilder.Entity(current.Key);
-                    if(current.Value != null)
-                        applyConfig.MakeGenericMethod(current.Key).Invoke(modelBuilder, new[] { Activator.CreateInstance(current.Value) });
                 }
+                if(current.Value != null)
+                    applyConfig.MakeGenericMethod(current.Key).Invoke(modelBuilder, new[] { Activator.CreateInstance(current.Value) });
             }
         }
 

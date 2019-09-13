@@ -15,6 +15,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.Annotations;
 using NLayerApp.DataAccessLayer.Configurations;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace NLayerApp.MvcApp
 {
@@ -82,6 +84,18 @@ namespace NLayerApp.MvcApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            //add this at the start of Configure
+            //app.Use(async (HttpContext context, Func<Task> next) =>
+            //{
+            //    await next.Invoke();
+
+            //    if (context.Response.StatusCode == 404 && !context.Request.Path.Value.Contains("/api"))
+            //    {
+            //        context.Request.Path = new PathString("/index.html");
+            //        await next.Invoke();
+            //    }
+            //});
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -103,6 +117,7 @@ namespace NLayerApp.MvcApp
             });
             
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -125,6 +140,8 @@ namespace NLayerApp.MvcApp
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+
 
         }
     }

@@ -14,6 +14,7 @@ import { SpeakerIdentificationComponent } from './pages/speaker-identification/s
 import { SpeakerVerificationComponent } from './pages/speaker-verification/speaker-verification.component';
 import { TextToSpeechComponent } from './pages/text-to-speech/text-to-speech.component';
 import { SpeechToTextComponent } from './pages/speech-to-text/speech-to-text.component';
+import { environment } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { SpeechToTextComponent } from './pages/speech-to-text/speech-to-text.com
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'speaker-profile', component: SpeakerProfileComponent }
-    ])
+    ], { useHash: false })
   ],
   providers: [],
   bootstrap: [AppComponent]
