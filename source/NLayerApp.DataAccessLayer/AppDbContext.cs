@@ -16,10 +16,9 @@ namespace NLayerApp.DataAccessLayer
     public class AppDbContext : DbContext, IContext
     {
         private readonly string _connectionString;
-        private readonly Dictionary<Type, Type> _types;
-        private readonly Type[] _typeConfigs;
-
-        public AppDbContext(string connectionString, Dictionary<Type, Type> types)
+        private readonly Type[] _types;
+         
+        public AppDbContext(string connectionString, Type[] types)
         {
             _connectionString = connectionString;
             _types = types;
@@ -33,91 +32,103 @@ namespace NLayerApp.DataAccessLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Debugger.Break();
             var applyConfig = modelBuilder.GetType()
                 .GetMethods().Where(m => m.Name.StartsWith("ApplyConfiguration"))
                 .FirstOrDefault();
 
             foreach (var current in _types)
             {
-                if (modelBuilder.Model.FindEntityType(current.Key) == null)
+                if (modelBuilder.Model.FindEntityType(current) == null)
                 {
-                    var entityTypeBuilder = modelBuilder.Entity(current.Key);
+                    var entityTypeBuilder = modelBuilder.Entity(current);
                 }
-                if(current.Value != null)
-                    applyConfig.MakeGenericMethod(current.Key).Invoke(modelBuilder, new[] { Activator.CreateInstance(current.Value) });
+                var attribute = current.GetCustomAttributes<TypeConfigurationAttribute>().FirstOrDefault();
+                if (attribute != null)
+                    applyConfig.MakeGenericMethod(current).Invoke(modelBuilder, new[] { Activator.CreateInstance(attribute.ConfigurationType) });
             }
         }
 
         #region IContext Members
 
-        public async Task<TEntity> GetEntityAsync<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> GetEntityAsync<TEntity>(params object[] keys) where TEntity : class, IEntity
         {
-            return await base.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.Equals(key));
+            var entity = await Set<TEntity>().FindAsync(keys);
+            return entity;
         }        
 
-        public IQueryable<TEntity> GetAll<TEntity, TKey>(Expression<Func<TEntity, bool>> expression) where TEntity : class, IEntity<TKey>
+        public IQueryable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class
         {
-            return this.Set<TEntity>()
+            return Set<TEntity>()
                 ?.Where(expression);
         }        
-        public IQueryable<TEntity> GetEntitiesAsync<TEntity, TKey>() where TEntity : class, IEntity<TKey>
+        public IQueryable<TEntity> GetEntities<TEntity>() where TEntity : class
         {
-            return base.Set<TEntity>();
+            return Set<TEntity>();
         }
 
-        public async Task<TEntity> Add<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> AddEntity<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
             entity.CreatedAt = DateTime.Now;
             var entry = await Set<TEntity>().AddAsync(entity);
             return entry.Entity;
         }
 
-        public async Task<TEntity> UpdateEntity<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> UpdateEntity<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
-            var entry = await Set<TEntity>().FindAsync(entity.Id);
+            object[] keyValues = GetKeys(entity);
+            var entry = await Set<TEntity>().FindAsync(keyValues);
+
             foreach (var current in entity.GetType().GetProperties().Where(p => p.Name != "Item"))
             {
                 current.SetValue(entry, current.GetValue(entity));
             }
+
             entry.ModifiedAt = DateTime.Now;
             entry.CreatedAt = entry.CreatedAt;
             //entry.State = EntityState.Modified;
             return entry;
         }
 
-        public async Task<bool> DeleteEntity<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
+        private object[] GetKeys<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
-            var entityToRemove = 
-                await Set<TEntity>()
-                    ?.FirstOrDefaultAsync(e => e.Id.Equals(key));
+            return Model.FindEntityType(typeof(TEntity))
+                    .FindPrimaryKey().Properties
+                    .Select(p => typeof(TEntity).GetProperty(p.Name).GetValue(entity))
+                    .ToArray();
+        }
+
+        public async Task<bool> DeleteEntity<TEntity>(params object[] keys) where TEntity : class, IEntity
+        {
+            var entityToRemove =
+                await Set<TEntity>().FindAsync(keys);
+
             if(entityToRemove == null)
                 return false;
             
-            this.Set<TEntity>().Remove(entityToRemove);
+            Set<TEntity>().Remove(entityToRemove);
             return true;
         }      
 
-        public bool DeleteEntity<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public bool DeleteEntity<TEntity>(TEntity entity) where TEntity : class
         {        
-            this.Set<TEntity>().Remove(entity);
+            Set<TEntity>().Remove(entity);
             return true;
         }        
 
         public void Save()
         {
-            base.SaveChanges();
+            SaveChanges();
         }
 
-        public bool DeleteEntities<TEntity, TKey>(IEnumerable<TEntity> entities) where TEntity : class, IEntity<TKey>
+        public bool DeleteEntities<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
-            base.RemoveRange(entities);
+            RemoveRange(entities);
             return true;
         }
 
         public async Task<int> SaveAsync()
         {
-            return await base.SaveChangesAsync();
+            return await SaveChangesAsync();
         }
 
 

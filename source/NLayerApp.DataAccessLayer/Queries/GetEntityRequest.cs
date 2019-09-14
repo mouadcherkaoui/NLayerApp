@@ -17,7 +17,7 @@ namespace NLayerApp.DataAccessLayer.Queries
         {
             using (_context = new AppDataContext())
             {
-                var result = await _context.GetEntityAsync<TEntity, TKey>(_key);
+                var result = await _context.GetEntityAsync<TEntity>(_key);
                 return result;
             }
         }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using NLayerApp.Infrastructure.DataAccessLayer;
 using NLayerApp.Infrastructure.Models;
+using NLayerApp.Models.Configurations;
 
 namespace NLayerApp.Models
 {
+    [TypeConfiguration(typeof(MemberConfiguration))]
     public class Member : IEntity, IEntity<int>
     {
         public int Id { get; set; }

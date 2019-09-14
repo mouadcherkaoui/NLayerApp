@@ -39,45 +39,51 @@ namespace NLayerApp.DataAccessLayer
         }
         #region IContext Members
 
-        public async Task<TEntity> GetEntityAsync<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> GetEntityAsync<TEntity>(params object[] keys) where TEntity : class, IEntity
         {
-            return await base.Set<TEntity>().FirstOrDefaultAsync(e => e.Id.Equals(key));
+            return await base.Set<TEntity>().FindAsync(keys);
         }        
 
-        public IQueryable<TEntity> GetAll<TEntity, TKey>(Expression<Func<TEntity, bool>> expression) where TEntity : class, IEntity<TKey>
+        public IQueryable<TEntity> GetAll<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class
         {
             return this.Set<TEntity>()
                 ?.Where(expression);
         }        
-        public IQueryable<TEntity> GetEntitiesAsync<TEntity, TKey>() where TEntity : class, IEntity<TKey>
+        public IQueryable<TEntity> GetEntities<TEntity>() where TEntity : class
         {
             return base.Set<TEntity>();
         }
-        public async Task<TEntity> Add<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> AddEntity<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
             entity.CreatedAt = DateTime.Now;
             var entry = await Set<TEntity>().AddAsync(entity);
             return entry.Entity;
         }
 
-        public async Task<TEntity> UpdateEntity<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public async Task<TEntity> UpdateEntity<TEntity>(TEntity entity) where TEntity : class, IEntity
         {
-            var entry = await Set<TEntity>().FindAsync(entity.Id);
+            var keyValues = Model.FindEntityType(typeof(TEntity))
+                .FindPrimaryKey().Properties
+                .Select(p => typeof(TEntity).GetProperty(p.Name).GetValue(entity))
+                .ToArray();
+
+            var entry = await Set<TEntity>().FindAsync(keyValues);
             foreach (var current in entity.GetType().GetProperties().Where(p => p.Name != "Item"))
             {
                 current.SetValue(entry, current.GetValue(entity));
             }
+
             entry.ModifiedAt = DateTime.Now;
             entry.CreatedAt = entry.CreatedAt;
             //entry.State = EntityState.Modified;
             return entry;
         }
 
-        public async Task<bool> DeleteEntity<TEntity, TKey>(TKey key) where TEntity : class, IEntity<TKey>
+        public async Task<bool> DeleteEntity<TEntity>(params object[] keys) where TEntity : class, IEntity
         {
             var entityToRemove = 
                 await Set<TEntity>()
-                    ?.FirstOrDefaultAsync(e => e.Id.Equals(key));
+                    ?.FindAsync(keys);
             if(entityToRemove == null)
                 return false;
             
@@ -85,7 +91,7 @@ namespace NLayerApp.DataAccessLayer
             return true;
         }      
 
-        public bool DeleteEntity<TEntity, TKey>(TEntity entity) where TEntity : class, IEntity<TKey>
+        public bool DeleteEntity<TEntity>(TEntity entity) where TEntity : class
         {        
             this.Set<TEntity>().Remove(entity);
             return true;
@@ -95,7 +101,7 @@ namespace NLayerApp.DataAccessLayer
             base.SaveChanges();
         }
 
-        public bool DeleteEntities<TEntity, TKey>(IEnumerable<TEntity> entities) where TEntity : class, IEntity<TKey>
+        public bool DeleteEntities<TEntity>(IEnumerable<TEntity> entities) where TEntity : class
         {
             base.RemoveRange(entities);
             return true;

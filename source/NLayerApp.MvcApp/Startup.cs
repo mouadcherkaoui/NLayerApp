@@ -32,16 +32,22 @@ namespace NLayerApp.MvcApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var types =
-                new Dictionary<Type, Type> {
-                    { typeof(Member), typeof(MemberConfiguration) },
-                    { typeof(Group),typeof(GroupConfiguration) },
-                    { typeof(GroupMembers), typeof(GroupMembersConfiguration) },
-                    { typeof(Subject), null },
-                    { typeof(Room), null }
-                }; 
+            //var types =
+            //    new Dictionary<Type, Type> {
+            //        { typeof(Member), typeof(MemberConfiguration) },
+            //        { typeof(Group),typeof(GroupConfiguration) },
+            //        { typeof(GroupMembers), typeof(GroupMembersConfiguration) },
+            //        { typeof(Subject), null },
+            //        { typeof(Room), null }
+            //    };
 
-            services.AddSingleton<IContext>(new AppDbContext(@"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;", types));
+            var types =
+                new Type[] {
+                    typeof(Member), typeof(Group),
+                    typeof(GroupMembers), typeof(Subject),
+                    typeof(Room)};
+
+            services.AddScoped<IContext>((s) => new AppDbContext(@"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;", types));
             // services.
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -73,7 +79,7 @@ namespace NLayerApp.MvcApp
             });
 
 
-            services.RegisterTypedRepositories(new Type[]{typeof(Member), typeof(Group), typeof(Subject), typeof(Room)});
+            services.RegisterTypedRepositories(new Type[]{typeof(Member), typeof(Group), typeof(GroupMembers), typeof(Subject), typeof(Room)});
             services
                 .AddMvc(o => o.Conventions.Add(new GeneratedControllerNameConvention()))
                 .UseDynamicControllers()

@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer.Queries
 {
-    public class GetEntitiesRequest<TEntity, TKey> : IAsyncCommandHandler<IEnumerable<TEntity>>
-        where TEntity: class, IEntity<TKey>
+    public class GetEntitiesRequest<TEntity> : IAsyncCommandHandler<IEnumerable<TEntity>>
+        where TEntity: class, IEntity
     {
         IContext _context;
-        TKey _key;
         public async Task<IEnumerable<TEntity>> ExecuteAsync()
         {
             using (_context = new AppDataContext())
             {
-                var result = _context.GetEntitiesAsync<TEntity, TKey>();
+                var result = _context.GetEntities<TEntity>();
                 return result;
             }
         }

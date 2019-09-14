@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using NLayerApp.Infrastructure.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using NLayerApp.Models.Configurations;
+using NLayerApp.Infrastructure.DataAccessLayer;
 
 namespace NLayerApp.Models
 {
+    [TypeConfiguration(typeof(GroupMembersConfiguration))]
     public class GroupMembers : IEntity, IManyToManyEntity<Group, int>
     {
         public object this[string index] => this.GetType().GetProperty(index).GetValue(this, null);

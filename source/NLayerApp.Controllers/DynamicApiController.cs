@@ -17,7 +17,8 @@ namespace NLayerApp.Controllers.Rest
         { }
 
         [HttpGet()]
-        public override IActionResult Get() => base.Get();
+        public override async Task<IActionResult> Get() => await base.Get();
+
 
         [HttpGet("{id}")]
         public override async Task<IActionResult> Get(TKey id) => await base.Get(id);

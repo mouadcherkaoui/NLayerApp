@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace NLayerApp.DataAccessLayer.Commands
 {
-    public class DeleteEntityCommand<TEntity, TKey> : IAsyncCommandHandler<bool>
-        where TEntity: class, IEntity<TKey>
+    public class DeleteEntityCommand<TEntity> : IAsyncCommandHandler<bool>
+        where TEntity: class, IEntity
     {
         // TDTObject _dtobject;
         // TDTOMappingResolver resolver
@@ -23,7 +23,7 @@ namespace NLayerApp.DataAccessLayer.Commands
         {
             using (context = new AppDataContext())
             {
-                var result = await context.DeleteEntity<TEntity, TKey>(_entity.Id);
+                var result = await context.DeleteEntity<TEntity>(_entity);
                 await context.SaveAsync();
                 return result; 
             }

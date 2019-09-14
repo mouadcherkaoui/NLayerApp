@@ -8,8 +8,8 @@ namespace NLayerApp.Infrastructure.Repositories
         where TEntity : class, IEntity, IEntity<TKey>
     {
         TEntity AddEntity(TEntity entity);
-        Task<bool> DeleteEntityAsync(TKey key);
-        Task<TEntity> GetEntity(TKey key);
+        Task<bool> DeleteEntityAsync(params object[] keys);
+        Task<TEntity> GetEntity(params object[] keys);
         IQueryable<TEntity> GetEntities();
         TEntity UpdateEntity(TEntity entity);         
     }    

@@ -7,6 +7,7 @@ using NLayerApp.Infrastructure.Controllers;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace NLayerApp.Controllers
 {
@@ -23,12 +24,12 @@ namespace NLayerApp.Controllers
 
         [HttpGet( "" )]
         [Produces( "application/json" )]
-        public virtual IActionResult Get()
+        public virtual async Task<IActionResult> Get()
         {
             return Ok(_repository.GetEntities());
         }
-        
-        [HttpGet("{id:int}")]
+
+        [HttpGet("{id}")]
         [Produces("application/json")]
         public virtual async Task<IActionResult> Get(TKey id)
         {

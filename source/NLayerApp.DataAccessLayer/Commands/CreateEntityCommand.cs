@@ -25,29 +25,10 @@ namespace NLayerApp.DataAccessLayer.Commands
         {
             using (context = new AppDataContext())
             {
-                var result = await context.Add<TEntity, TKey>(_entity);
+                var result = await context.AddEntity<TEntity>(_entity);
                 await context.SaveAsync();
                 return result; 
             }
-        }
-    }
-
-    public class EntityRequest<TEntity, TResponse> : IRequest<TResponse>
-    {
-        // IMappingConfig
-        // IMapFrom<>
-        // IMapTo<>
-        TEntity _entity;
-        public EntityRequest(TEntity entity)
-        {
-            _entity = entity;
-        }
-    }
-    public class EntityCommand<TEntity, TResponse> : IRequestHandler<EntityRequest<TEntity, TResponse>, TResponse>
-    {
-        public Task<TResponse> Handle(EntityRequest<TEntity, TResponse> request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

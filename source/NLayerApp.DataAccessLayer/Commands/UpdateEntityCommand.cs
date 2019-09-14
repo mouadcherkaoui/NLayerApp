@@ -23,7 +23,7 @@ namespace NLayerApp.DataAccessLayer.Commands
         {
             using (context = new AppDataContext())
             {
-                var result = (await context.UpdateEntity<TEntity, TKey>(_entity));
+                var result = (await context.UpdateEntity<TEntity>(_entity));
                 await context.SaveAsync();
                 return result;
             }
