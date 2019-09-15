@@ -15,7 +15,7 @@ namespace NLayerApp.DataAccessLayer
 {
     public class AppDataContext : DbContext, IContext
     {
-        private readonly string _connectionString = @"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;";         
+        private readonly string _connectionString = @"Server=.\;Initial Catalog=nlayerappdb;Integrated Security=True;";         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
@@ -27,15 +27,21 @@ namespace NLayerApp.DataAccessLayer
             Debugger.Break();
             var assembly = typeof(BaseEntity).GetTypeInfo().Assembly;
             var types = assembly.DefinedTypes.Where(t => t.GetInterfaces().Contains(typeof(IEntity)) && t.IsClass && !t.IsAbstract).ToList();
+
+            var applyConfig = modelBuilder.GetType()
+                .GetMethods().Where(m => m.Name.StartsWith("ApplyConfiguration"))
+                .FirstOrDefault();
+
             foreach (var current in types)
             {
-                if(modelBuilder.Model.FindEntityType(current.AsType()) == null)
-                    modelBuilder.Entity(current.AsType());
-            }
-
-            modelBuilder.ApplyConfiguration<Group>(new GroupConfiguration());
-            modelBuilder.ApplyConfiguration<Member>(new MemberConfiguration());
-            modelBuilder.ApplyConfiguration<GroupMembers>(new GroupMembersConfiguration());            
+                if (modelBuilder.Model.FindEntityType(current) == null)
+                {
+                    var entityTypeBuilder = modelBuilder.Entity(current);
+                }
+                var attribute = current.GetCustomAttributes<TypeConfigurationAttribute>().FirstOrDefault();
+                if (attribute != null)
+                    applyConfig.MakeGenericMethod(current).Invoke(modelBuilder, new[] { Activator.CreateInstance(attribute.ConfigurationType) });
+            }        
         }
         #region IContext Members
 

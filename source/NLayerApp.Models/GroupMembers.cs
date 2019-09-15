@@ -10,11 +10,13 @@ using NLayerApp.Infrastructure.DataAccessLayer;
 namespace NLayerApp.Models
 {
     [TypeConfiguration(typeof(GroupMembersConfiguration))]
-    public class GroupMembers : IEntity, IManyToManyEntity<Group, int>
+    public class GroupMembers : IEntity, IEntity<object>
     {
         public object this[string index] => this.GetType().GetProperty(index).GetValue(this, null);
+        private object _id = new { MemberId=0, GroupId=0 };
         [NotMapped]
-        public int Id { get; set; }
+        public object Id { get => _id = new { MemberId, GroupId }; set => _id = value; }
+
         [ForeignKey("GroupId")]
         public int GroupId { get; set; }
         public Group Group { get; set; }

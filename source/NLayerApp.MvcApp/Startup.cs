@@ -17,6 +17,11 @@ using NLayerApp.DataAccessLayer.Configurations;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using MediatR;
+using NLayerApp.DataAccessLayer.Commands;
+using NLayerApp.DataAccessLayer.Requests;
+using NLayerApp.Controllers.Attributes;
+using NLayerApp.DataAccessLayer.Handlers;
 
 namespace NLayerApp.MvcApp
 {
@@ -32,30 +37,46 @@ namespace NLayerApp.MvcApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var types =
-            //    new Dictionary<Type, Type> {
-            //        { typeof(Member), typeof(MemberConfiguration) },
-            //        { typeof(Group),typeof(GroupConfiguration) },
-            //        { typeof(GroupMembers), typeof(GroupMembersConfiguration) },
-            //        { typeof(Subject), null },
-            //        { typeof(Room), null }
-            //    };
-
             var types =
                 new Type[] {
-                    typeof(Member), typeof(Group),
-                    typeof(GroupMembers), typeof(Subject),
-                    typeof(Room)};
+                    typeof(Member), typeof(Group), typeof(GroupMembers),
+                    typeof(Subject), typeof(Room)};
 
-            services.AddScoped<IContext>((s) => new AppDbContext(@"Server=.\;Initial Catalog=dynamicsdb;Integrated Security=True;", types));
-            // services.
-            // In production, the Angular files will be served from this directory
+
+            foreach(var type in types)
+            {
+                // ReadEntities Handler
+                var handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(ReadEntitiesRequest<>).MakeGenericType(type), typeof(IEnumerable<>).MakeGenericType(type) });
+                services.AddScoped(handlerType, typeof(ReadEntitiesRequestHandler<>).MakeGenericType(type));
+
+                // ReadEntity(id) Handler
+                handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(ReadEntityRequest<,>).MakeGenericType(type, typeof(int)), type });
+                services.AddScoped(handlerType, typeof(ReadEntityRequestHandler<, >).MakeGenericType(type, typeof(int)));
+
+                // CreateEntity Handler
+                handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(CreateEntityRequest<>).MakeGenericType(type), type });
+                services.AddScoped(handlerType, typeof(CreateEntityRequestHandler<>).MakeGenericType(type));
+
+                // UpdateEntity({id,entity}) Handler
+                handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(UpdateEntityRequest<,>).MakeGenericType(type, typeof(int)), type });
+                services.AddScoped(handlerType, typeof(UpdateEntityRequestHandler<,>).MakeGenericType(type, typeof(int)));
+
+            }
+
+            services.AddMediatR(new Type[] { typeof(ReadEntitiesRequestHandler<>) });
+
+            services.AddScoped<IContext>((s) => new AppDbContext(@"Server=.\;Initial Catalog=nlayerappdb;Integrated Security=True;", types));
+
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { 
@@ -81,7 +102,11 @@ namespace NLayerApp.MvcApp
 
             services.RegisterTypedRepositories(new Type[]{typeof(Member), typeof(Group), typeof(GroupMembers), typeof(Subject), typeof(Room)});
             services
-                .AddMvc(o => o.Conventions.Add(new GeneratedControllerNameConvention()))
+                .AddMvc()
+                .AddJsonOptions(options => {
+                    options.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                })
                 .UseDynamicControllers()
                 .AddControllersAsServices()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -90,18 +115,6 @@ namespace NLayerApp.MvcApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //add this at the start of Configure
-            //app.Use(async (HttpContext context, Func<Task> next) =>
-            //{
-            //    await next.Invoke();
-
-            //    if (context.Response.StatusCode == 404 && !context.Request.Path.Value.Contains("/api"))
-            //    {
-            //        context.Request.Path = new PathString("/index.html");
-            //        await next.Invoke();
-            //    }
-            //});
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -112,11 +125,7 @@ namespace NLayerApp.MvcApp
                 app.UseHsts();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
@@ -125,6 +134,7 @@ namespace NLayerApp.MvcApp
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
             app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>
@@ -133,12 +143,9 @@ namespace NLayerApp.MvcApp
                     name: "default",
                     template: "/api/{controller}/{action=Index}/{id?}");
             });
-            
+
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
-
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
@@ -146,9 +153,6 @@ namespace NLayerApp.MvcApp
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-
-
         }
     }
 

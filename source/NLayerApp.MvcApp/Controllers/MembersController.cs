@@ -8,30 +8,30 @@ using NLayerApp.DataAccessLayer.Commands;
 using NLayerApp.Infrastructure.DataAccessLayer;
 using NLayerApp.Infrastructure.Repositories;
 using NLayerApp.Models;
+using MediatR;
+using NLayerApp.DataAccessLayer.Requests;
+using NLayerApp.Controllers.Rest;
 
 namespace NLayerApp.MvcApp.Controllers
 {
-    public class MembersController : ApiRepositoryController<AppDataContext, Member, int>
+    [Route("api/member")]
+    public class MembersController : DynamicApiController<Member, int>
     {
-        IContext _dbContext;
-        public MembersController(IRepository<Member, int> repository, IContext context) : base(repository)
+        IMediator _mediator;
+        public MembersController(IMediator mediator) : base(mediator)
         {
-            _dbContext = context;
+            _mediator = mediator;
         }
 
-        public override async Task<IActionResult> Get(int id)
+        public override async Task<IActionResult> Get([FromRoute]int id)
         {
-            var request = new EntityRequest<object, Member>((object)id);
-            var handler = new GetEntityRequestHandler<Member>(_dbContext);
-            var result = await handler.Handle(request, new CancellationToken());
+            var result = await _mediator.Send(new EntityRequest<object, Member>((object)id));
             return new OkObjectResult(result);
         }
 
         public override async Task<IActionResult> Get()
         {
-            var request = new EntityRequest<bool, IEnumerable<Member>>(false);
-            var handler = new GetEntitiesRequestHandler<Member>(_dbContext);
-            var result = await handler.Handle(request, new CancellationToken());
+            var result = await _mediator.Send(new EntityRequest<bool, IEnumerable<Member>>(false));
             return (new OkObjectResult(result));
 
             //return base.Get();

@@ -24,7 +24,7 @@ namespace NLayerApp.Controllers
                 Type keyType = current.GetProperties().FirstOrDefault(p => p.Name.Contains("Id")).PropertyType;
 
                 // Type controllerType = typeof(RepositoryController<,,>).MakeGenericType(new Type[] {typeof(IContext), current.AsType(), keyType});                     
-                Type apiControllerType = typeof(DynamicApiController<,,>).MakeGenericType(new Type[] {typeof(IContext), current.AsType(), keyType});
+                Type apiControllerType = typeof(ApiCommandController<,>).MakeGenericType(new Type[] {current.AsType(), keyType});
                 
                 // feature.Controllers.Add(controllerType.GetTypeInfo());
                 feature.Controllers.Add(apiControllerType.GetTypeInfo());

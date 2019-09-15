@@ -14,14 +14,10 @@ namespace NLayerApp.Controllers.Attributes
         }
         public void Apply(ControllerModel controller)
         {
-            if(controller.ControllerType.GetGenericTypeDefinition() == typeof(RepositoryController<,,>))
+            if(controller.ControllerType.IsGenericType && 
+                controller.ControllerType.GetGenericTypeDefinition() == typeof(ApiCommandController<,>))
             {
-                var entityType = controller.ControllerType.GenericTypeArguments[1];
-                controller.ControllerName = $"{entityType.Name}s";                
-            } 
-            else if(controller.ControllerType.GetGenericTypeDefinition() == typeof(DynamicApiController<,,>))
-            {
-                var entityType = controller.ControllerType.GenericTypeArguments[1];
+                var entityType = controller.ControllerType.GenericTypeArguments[0];
                 controller.ControllerName = $"{entityType.Name}s";
             }
         }

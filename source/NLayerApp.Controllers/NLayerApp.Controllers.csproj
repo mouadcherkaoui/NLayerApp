@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" />
@@ -12,9 +13,13 @@
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" /> -->
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NLayerApp.DataAccessLayer\NLayerApp.DataAccessLayer.csproj" />
     <ProjectReference Include="..\NLayerApp.Infrastructure\NLayerApp.Infrastructure.csproj" />
     <ProjectReference Include="..\NLayerApp.Repositories\NLayerApp.Repositories.csproj" />
     <ProjectReference Include="..\NLayerApp.Models\NLayerApp.Models.csproj" />
     <ProjectReference Include="..\NLayerApp.Views\NLayerApp.Views.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
   </ItemGroup>
 </Project>

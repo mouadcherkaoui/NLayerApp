@@ -9,8 +9,7 @@ namespace NLayerApp.DataAccessLayer.Configurations
         public void Configure(EntityTypeBuilder<Group> builder)
         {
             builder.HasKey(g => g.Id);
-            builder.HasMany(g => g.Members)
-                .WithOne(g => g.Group);
+            builder.HasMany(g => g.Members);
         }
     }
 }

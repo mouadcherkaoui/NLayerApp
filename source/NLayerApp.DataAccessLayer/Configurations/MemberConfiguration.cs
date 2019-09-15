@@ -15,8 +15,7 @@ namespace NLayerApp.DataAccessLayer.Configurations
         public void Configure(EntityTypeBuilder<Member> builder)
         {
             builder.HasKey(g => g.Id);
-            builder.HasMany(g => g.Groups)
-                .WithOne(g => g.Member);
+            builder.HasMany(g => g.Groups);
         }
     }
 }
