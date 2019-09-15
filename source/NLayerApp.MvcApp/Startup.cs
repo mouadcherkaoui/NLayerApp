@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -12,15 +11,9 @@ using NLayerApp.Controllers;
 using NLayerApp.DataAccessLayer;
 using NLayerApp.Infrastructure.DataAccessLayer;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.Annotations;
-using NLayerApp.DataAccessLayer.Configurations;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
 using MediatR;
-using NLayerApp.DataAccessLayer.Commands;
 using NLayerApp.DataAccessLayer.Requests;
-using NLayerApp.Controllers.Attributes;
 using NLayerApp.DataAccessLayer.Handlers;
 
 namespace NLayerApp.MvcApp
@@ -100,7 +93,8 @@ namespace NLayerApp.MvcApp
             });
 
 
-            services.RegisterTypedRepositories(new Type[]{typeof(Member), typeof(Group), typeof(GroupMembers), typeof(Subject), typeof(Room)});
+            //services.RegisterTypedRepositories(new Type[]{typeof(Member), typeof(Group), typeof(GroupMembers), typeof(Subject), typeof(Room)});
+
             services
                 .AddMvc()
                 .AddJsonOptions(options => {

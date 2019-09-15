@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using NLayerApp.DataAccessLayer.Configurations;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace NLayerApp.DataAccessLayer
 {
@@ -50,6 +51,8 @@ namespace NLayerApp.DataAccessLayer
 
         #region IContext Members
 
+        public Type[] RegisteredTypes { get => _types; }
+        //public Dictionary<IEntityType, IProperty[]> Key { get=> Model.GetEntityTypes().ToDictionary(t => t.DefiningEntityType, t => t.FindPrimaryKey().Properties.ToArray());  }
         public async Task<TEntity> GetEntityAsync<TEntity>(params object[] keys) where TEntity : class, IEntity
         {
             var entity = await Set<TEntity>().FindAsync(keys);

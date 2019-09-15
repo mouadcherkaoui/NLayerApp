@@ -9,6 +9,7 @@ namespace NLayerApp.Infrastructure.DataAccessLayer
 {
     public interface IContext: IDisposable
     {
+        Type[] RegisteredTypes { get; }
         Task<TEntity> AddEntity<TEntity>(TEntity entity) where TEntity : class, IEntity;        
         Task<TEntity> GetEntityAsync<TEntity>(params object[] keys) where TEntity : class, IEntity;
 

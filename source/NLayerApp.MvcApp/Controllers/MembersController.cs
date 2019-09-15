@@ -1,12 +1,6 @@
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NLayerApp.Controllers;
-using NLayerApp.DataAccessLayer;
-using NLayerApp.DataAccessLayer.Commands;
-using NLayerApp.Infrastructure.DataAccessLayer;
-using NLayerApp.Infrastructure.Repositories;
 using NLayerApp.Models;
 using MediatR;
 using NLayerApp.DataAccessLayer.Requests;
@@ -25,13 +19,16 @@ namespace NLayerApp.MvcApp.Controllers
 
         public override async Task<IActionResult> Get([FromRoute]int id)
         {
-            var result = await _mediator.Send(new EntityRequest<object, Member>((object)id));
+            var result = await _mediator.Send(new ReadEntityRequest<Member, int>(id));
+
             return new OkObjectResult(result);
         }
 
         public override async Task<IActionResult> Get()
         {
-            var result = await _mediator.Send(new EntityRequest<bool, IEnumerable<Member>>(false));
+            var includedProperties = Request.Query.ContainsKey("include") ? Request.Query["include"].ToArray() : null;
+            var result = await _mediator.Send(new ReadEntitiesRequest<Member>(includedProperties));
+
             return (new OkObjectResult(result));
 
             //return base.Get();

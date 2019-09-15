@@ -9,8 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview9.19424.4" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NLayerApp.CognitiveAIApis.Infrastructure\NLayerApp.CognitiveAIApis.Infrastructure.csproj" />
+    <ProjectReference Include="..\NLayerApp.Controllers\NLayerApp.Controllers.csproj" />
+    <ProjectReference Include="..\NLayerApp.DataAccessLayer\NLayerApp.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\NLayerApp.Infrastructure\NLayerApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\NLayerApp.Models\NLayerApp.Models.csproj" />
   </ItemGroup>
 
 </Project>

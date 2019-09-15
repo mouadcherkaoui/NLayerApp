@@ -1,10 +1,7 @@
-using System;
 using System.Threading.Tasks;
-using NLayerApp.Infrastructure.CQRS;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using System.Collections.Generic;
-using NLayerApp.DataAccessLayer.Commands;
 using NLayerApp.DataAccessLayer.Requests;
 using NLayerApp.Controllers.Attributes;
 

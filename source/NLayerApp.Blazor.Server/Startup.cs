@@ -2,14 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLayer.Blazor.ServerApp.Data;
+using NLayerApp.Controllers;
+using NLayerApp.DataAccessLayer;
+using NLayerApp.DataAccessLayer.Handlers;
+using NLayerApp.DataAccessLayer.Requests;
+using NLayerApp.Infrastructure.DataAccessLayer;
+using NLayerApp.Models;
 
 namespace NLayer.Blazor.ServerApp
 {
@@ -29,6 +37,52 @@ namespace NLayer.Blazor.ServerApp
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            var types =
+                new Type[] {
+                    typeof(Member), typeof(Group), typeof(GroupMembers),
+                    typeof(Subject), typeof(Room)};
+
+
+            foreach (var type in types)
+            {
+                // ReadEntities Handler
+                var handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(ReadEntitiesRequest<>).MakeGenericType(type), typeof(IEnumerable<>).MakeGenericType(type) });
+                services.AddScoped(handlerType, typeof(ReadEntitiesRequestHandler<>).MakeGenericType(type));
+
+                // ReadEntity(id) Handler
+                handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(ReadEntityRequest<,>).MakeGenericType(type, typeof(int)), type });
+                services.AddScoped(handlerType, typeof(ReadEntityRequestHandler<,>).MakeGenericType(type, typeof(int)));
+
+                // CreateEntity Handler
+                handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(CreateEntityRequest<>).MakeGenericType(type), type });
+                services.AddScoped(handlerType, typeof(CreateEntityRequestHandler<>).MakeGenericType(type));
+
+                // UpdateEntity({id,entity}) Handler
+                handlerType = typeof(IRequestHandler<,>)
+                    .MakeGenericType(new Type[] { typeof(UpdateEntityRequest<,>).MakeGenericType(type, typeof(int)), type });
+                services.AddScoped(handlerType, typeof(UpdateEntityRequestHandler<,>).MakeGenericType(type, typeof(int)));
+
+            }
+
+            services.AddMediatR(new Type[] { typeof(ReadEntitiesRequestHandler<>) });
+
+            services.AddScoped<IContext>((s) => new AppDbContext(@"Server=.\;Initial Catalog=nlayerappdb;Integrated Security=True;", types));
+
+            services
+                .AddMvc(options => {
+                    options.EnableEndpointRouting = false;
+                })
+                .AddJsonOptions(options => {
+                    options.JsonSerializerOptions.MaxDepth = 0;
+                    // Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                })
+                .UseDynamicControllers()
+                .AddControllersAsServices()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,12 +104,33 @@ namespace NLayer.Blazor.ServerApp
 
             app.UseRouting();
 
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "/api/{controller}/{action=Index}/{id?}");
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
                 /*endpoints.MapDynamicControllerRoute*/
-            });
+                endpoints.MapControllers();
+            });            
+
+        }
+    }
+
+    public static class MvcBuilderExtensions
+    {
+        public static IMvcBuilder UseDynamicControllers(this IMvcBuilder builder)
+        {
+            return builder.ConfigureApplicationPartManager(
+                    partManager =>
+                    {
+                        partManager.FeatureProviders.Add(new GenericControllerFeatureProvider());
+                    });
         }
     }
 }
