@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NLayer.Blazor.ServerApp.Data;
+using NLayerApp.Blazor.ServerApp.Data;
 using NLayerApp.Controllers;
 using NLayerApp.DataAccessLayer;
 using NLayerApp.DataAccessLayer.Handlers;
@@ -38,10 +39,23 @@ namespace NLayer.Blazor.ServerApp
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
+            if (!services.Any(x => x.ServiceType == typeof(HttpClient)))
+            {
+                // Setup HttpClient for server side in a client side compatible fashion
+                services.AddScoped<HttpClient>(s =>
+                {
+                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
+                    var navManager = s.GetRequiredService<NavigationManager>();
+                    return new HttpClient
+                    {
+                        BaseAddress = new Uri(navManager.BaseUri) //new Uri("http://localhost:*")
+                    };
+                });
+            }
             var types =
-                new Type[] {
-                    typeof(Member), typeof(Group), typeof(GroupMembers),
-                    typeof(Subject), typeof(Room)};
+            new Type[] {
+                typeof(Member), typeof(Group), typeof(GroupMembers),
+                typeof(Subject), typeof(Room)};
 
 
             foreach (var type in types)
@@ -65,6 +79,10 @@ namespace NLayer.Blazor.ServerApp
                 handlerType = typeof(IRequestHandler<,>)
                     .MakeGenericType(new Type[] { typeof(UpdateEntityRequest<,>).MakeGenericType(type, typeof(int)), type });
                 services.AddScoped(handlerType, typeof(UpdateEntityRequestHandler<,>).MakeGenericType(type, typeof(int)));
+
+                // Adding GenericApiEndpointService<TType>
+                var endpointServiceType = typeof(GenericApiEndpointService<>).MakeGenericType(type);
+                services.AddScoped(endpointServiceType);
 
             }
 

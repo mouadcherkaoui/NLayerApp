@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayerApp.MvcApp", "NLayerA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLayerApp.Blazor", "NLayerApp.Blazor", "{06740392-AB9E-4E83-9691-637678B41A6E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayer.Blazor.ServerApp", "NLayerApp.Blazor.Server\NLayer.Blazor.ServerApp.csproj", "{8DE2184E-CE2D-4FB3-9107-7A0C0594994D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayerApp.Blazor.ServerApp", "NLayerApp.Blazor.Server\NLayerApp.Blazor.ServerApp.csproj", "{8DE2184E-CE2D-4FB3-9107-7A0C0594994D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NLayerApp.Blazor.WebAssembly", "NLayerApp.Blazor.WebAssembly\NLayerApp.Blazor.WebAssembly.csproj", "{4EA9A893-250D-4AC4-91E3-AC4B3563411B}"
 EndProject

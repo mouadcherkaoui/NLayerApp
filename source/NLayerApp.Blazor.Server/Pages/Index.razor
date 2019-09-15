@@ -1,5 +1,39 @@
 ﻿@page "/"
-
+@using  NLayerApp.Blazor.ServerApp.Models
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
+<ReflectionTest Operation="CRUDOperations.Create" Items="test" TItem="MemberViewModel">
+    <ItemTemplate>
+        <li>
+            <input type="text" @bind="@context.firstName" />
+            <input type="text" @bind="@context.lastName" />
+        </li>
+    </ItemTemplate>
+</ReflectionTest>
+
+@code {
+
+    List<MemberViewModel> test = new List<MemberViewModel> {
+        new MemberViewModel {
+            Id = 11,
+            firstName = "firstName1",
+            lastName = "lastName1"
+        },
+        new MemberViewModel {
+            Id = 12,
+            firstName = "firstName2",
+            lastName = "lastName2"
+        },
+        new MemberViewModel {
+            Id = 13,
+            firstName = "firstName3",
+            lastName = "lastName3"
+        }
+    };
+
+    void InputChange(ChangeEventArgs e)
+    {
+        Console.WriteLine(e.Value);
+        Console.WriteLine(e);
+    }
+}

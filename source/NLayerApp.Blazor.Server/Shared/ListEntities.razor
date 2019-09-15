@@ -1,0 +1,45 @@
+﻿@using NLayerApp.Blazor.ServerApp.Data
+@using System.Reflection
+
+@typeparam  TEntity
+@inject GenericApiEndpointService<TEntity> endpoint
+
+<h1>@typeof(TEntity).Name</h1>
+
+@if (entities == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+            @foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                <th>@property.Name</th>
+            }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var group in entities)
+{
+            <tr>
+                @foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    <td>@property.GetValue(group)</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    TEntity[] entities;
+
+    protected override async Task OnInitializedAsync()
+    {
+        entities = await endpoint.GetEntitiesAsync();
+    }
+}

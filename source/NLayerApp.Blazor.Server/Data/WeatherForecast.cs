@@ -1,6 +1,6 @@
 using System;
 
-namespace NLayer.Blazor.ServerApp.Data
+namespace NLayerApp.Blazor.ServerApp.Data
 {
     public class WeatherForecast
     {
