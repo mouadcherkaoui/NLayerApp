@@ -55,7 +55,7 @@ namespace NLayer.Blazor.ServerApp
             var types =
             new Type[] {
                 typeof(Member), typeof(Group), typeof(GroupMembers),
-                typeof(Subject), typeof(Room)};
+                typeof(Subject), typeof(Room), typeof(Page)};
 
 
             foreach (var type in types)
