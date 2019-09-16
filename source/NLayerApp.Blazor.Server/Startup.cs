@@ -35,6 +35,7 @@ namespace NLayer.Blazor.ServerApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var defaultConnectionString = Configuration.GetConnectionString("DefaultConnectionString");
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
@@ -88,7 +89,7 @@ namespace NLayer.Blazor.ServerApp
 
             services.AddMediatR(new Type[] { typeof(ReadEntitiesRequestHandler<>) });
 
-            services.AddScoped<IContext>((s) => new AppDbContext(@"Server=.\;Initial Catalog=nlayerappdb;Integrated Security=True;", types));
+            services.AddScoped<IContext>((s) => new AppDbContext(defaultConnectionString, types));
 
             services
                 .AddMvc(options => {

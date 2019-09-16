@@ -1,0 +1,11 @@
+﻿@page "/groups/{id}"
+
+@using NLayerApp.Blazor.ServerApp.Data
+@using NLayerApp.Models
+@using System.Reflection
+
+<EntityDetails TEntity="Group" TKey="string" Key="id"/>
+
+@code{
+    [Parameter] public string id { get; set; } 
+}

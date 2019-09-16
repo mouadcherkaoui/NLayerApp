@@ -1,0 +1,45 @@
+﻿@using NLayerApp.Blazor.ServerApp.Data
+@using System.Reflection
+
+@typeparam TEntity
+@typeparam TKey
+
+@inject GenericApiEndpointService<TEntity> endpoint
+
+<h1>@typeof(TEntity).Name</h1>
+
+@if (entity == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>property</th><th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                {
+                <tr>
+
+                    <td>@(property.Name)</td>
+                    <td>
+                        <input value="@property.GetValue(entity)" /></td>
+                
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    TEntity entity;
+    [Parameter] public TKey Key { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        entity = await endpoint.GetEntityAsync(Key);
+    }
+}

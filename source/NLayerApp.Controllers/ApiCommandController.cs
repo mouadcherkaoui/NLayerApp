@@ -37,6 +37,10 @@ namespace NLayerApp.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody] TEntity entity)
         {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(new { entity, ModelState.ValidationState });
+            }
             var result = await _mediator.Send(new CreateEntityRequest<TEntity>(entity));
             return new CreatedResult($"api/{typeof(TEntity).Name}", result);
         }
@@ -44,8 +48,14 @@ namespace NLayerApp.Controllers
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Put(TKey id, [FromBody] TEntity entity)
         {
-            var result = await _mediator.Send(new UpdateEntityRequest<TEntity, TKey>(new KeyValuePair<TKey, TEntity>(id, entity)));
+            if(!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(new { entity, ModelState.ValidationState });
+            }
+            var request = new UpdateEntityRequest<TEntity, TKey>(new KeyValuePair<TKey, TEntity>(id, entity));
+            var result = await _mediator.Send(request);
             return new OkObjectResult(result);
+
         }
 
         [HttpDelete("{id}")]

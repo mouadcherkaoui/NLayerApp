@@ -18,6 +18,8 @@ else
             @foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 <th>@property.Name</th>
+                <th></th>
+                <th></th>
             }
             </tr>
         </thead>
@@ -28,12 +30,17 @@ else
                 @foreach (var property in typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance))
                 {
                     <td>@property.GetValue(group)</td>
+                    <td></td>
+                    <td></td>
                 }
+                
             </tr>
             }
         </tbody>
     </table>
 }
+
+@*<EntityDetails TEntity="TEntity" TKey="string" Key="String.Empty"></EntityDetails>*@
 
 @code {
     TEntity[] entities;

@@ -1,0 +1,11 @@
+﻿@page "/pages/{id}/update"
+
+@using NLayerApp.Blazor.ServerApp.Data
+@using NLayerApp.Models
+@using System.Reflection
+
+<UpdateEntity TEntity="Page" TKey="string" Key="id"/>
+
+@code{
+    [Parameter] public string id { get; set; } 
+}

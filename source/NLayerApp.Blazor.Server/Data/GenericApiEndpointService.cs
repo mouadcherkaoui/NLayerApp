@@ -19,5 +19,11 @@ namespace NLayerApp.Blazor.ServerApp.Data
             var result = await _client.GetJsonAsync<TEntity[]>($"/api/{typeof(TEntity).Name}s");
             return result;           
         }
+
+        public async Task<TEntity> GetEntityAsync<TKey>(TKey key)
+        {
+            var result = await _client.GetJsonAsync<TEntity>($"/api/{typeof(TEntity).Name}s/{key}");
+            return result;
+        }
     }
 }
